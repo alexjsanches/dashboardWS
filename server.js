@@ -1,10 +1,21 @@
-import fetch from 'node-fetch';
+const express = require('express');
+const app = express();
+const fetch = require('node-fetch');
+const axios = require('axios');
+const cors = require('cors'); // Importe o pacote cors
 
-let bearerToken: string = ''; // Variável para armazenar o token
+// Configurações
+const port = process.env.PORT || 3000;
+
+let bearerToken = '';
 const apiEndpoint = 'https://api.sankhya.com.br/login';
 const appKey = '2a1e93b9-4f51-41e5-941f-45d783c3dd90';
 const username = 'alexandre.sanches@worldseg.com.br';
 const password = '862485inteliX!';
+const contentType = 'text/xml';
+
+// Use o middleware CORS antes de definir suas rotas
+app.use(cors());
 
 // Função para obter um novo Bearer Token
 async function getBearerToken() {
@@ -16,37 +27,40 @@ async function getBearerToken() {
         'appkey': appKey,
         'username': username,
         'password': password,
-      } as Record<string, string>, // Defina o tipo explícito para o objeto de cabeçalho
+      },
     });
 
     if (response.status === 200) {
       const data = await response.json();
       if (data.bearerToken) {
-        bearerToken = data.bearerToken; // Atualiza o token
-        console.log('Bearer Token atualizado:', bearerToken);
-        return bearerToken; // Retorna o token
+        bearerToken = data.bearerToken;
+        return bearerToken;
       } else {
-        console.error('Chave "bearerToken" não encontrada na resposta JSON.');
         throw new Error('Chave "bearerToken" não encontrada na resposta JSON.');
       }
     } else {
-      console.error('Erro ao obter o token:', response.status, response.statusText);
       throw new Error(`Erro ao obter o token: ${response.status} ${response.statusText}`);
     }
   } catch (error) {
-    console.error('Erro na solicitação:', error);
     throw error;
   }
 }
 
-// Função a ser chamada quando o botão for clicado
-async function handleFetchDataApi() {
+// Rota para buscar e retornar o Bearer Token
+app.get('/api/token', async (req, res) => {
   try {
-    await getBearerToken(); // Chama a função para obter o token quando o botão é clicado
+    const token = await getBearerToken();
+    if (token !== null) {
+      res.json({ token });
+    } else {
+      res.status(500).json({ error: 'Erro ao obter o token' });
+    }
   } catch (error) {
-    console.error('Erro ao obter o token:', error);
+    res.status(500).json({ error: 'Erro na requisição' });
   }
-}
+});
 
-// Exporte a função handleFetchDataApi e o bearerToken
-export { handleFetchDataApi, bearerToken };
+// Iniciar o servidor
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
