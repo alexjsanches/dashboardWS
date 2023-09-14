@@ -50,11 +50,10 @@ export default function UserReports() {
     <AdminLayout>
       <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
         <>
-          <Flex columns={{ base: 1, md: 2, xl: 2 }} mb='20px'>
+          <Flex  mb='20px'>
             <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
               <DailyTraffic />
               <CheckTable columnsData={columnsDataCheck} tableData={(tableDataCheck as unknown) as TableData[]} />
-              <Banner />
             </SimpleGrid>
           </Flex>
           <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
