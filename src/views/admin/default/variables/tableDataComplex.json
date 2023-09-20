@@ -1,26 +1,32 @@
 [
   {
-    "name":"Horizon UI PRO",
-    "status": "Approved",
-    "date": "18 Apr 2022",
-    "progress": 75.5  
+    "nome":"Vendedor 1",
+    "quantidade": "13",
+    "valor": "R$ 147.841,88",
+    "progresso": 85.9  
   },
   {
-    "name":"Horizon UI Free",
-    "status": "Disable",
-    "date": "18 Apr 2022",
-    "progress": 25.5  
+    "nome":"Vendedor 2",
+    "quantidade": "23",
+    "valor": "R$ 384.944,12",
+    "progresso": 75.5  
   },
   {
-    "name":"Marketplace",
-    "status": "Error",
-    "date": "20 May 2021",
-    "progress": 90  
+    "nome":"Vendedor 3",
+    "quantidade": "7",
+    "valor": "R$ 541.122,50",
+    "progresso": 68.3  
   },
   {
-    "name":"Weekly Updates",
-    "status": "Approved",
-    "date": "12 Jul 2021",
-    "progress": 50.5  
+    "nome":"Vendedor 4",
+    "quantidade": "16",
+    "valor": "R$ 46.142,98",
+    "progresso": 67.8  
+  },
+  {
+    "nome":"Vendedor 5",
+    "quantidade": "23",
+    "valor": "R$ 46.749,13",
+    "progresso": 59.2  
   }
 ]

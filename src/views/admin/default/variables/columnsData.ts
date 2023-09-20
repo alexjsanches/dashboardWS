@@ -21,30 +21,30 @@ export const columnsDataCheck = [
 ];
 export const columnsDataComplex = [
   {
-    Header: "NAME",
-    accessor: "name",
+    Header: "NOME",
+    accessor: "nome",
   },
   {
-    Header: "STATUS",
-    accessor: "status",
+    Header: "QUANTIDADE",
+    accessor: "quantidade",
   },
   {
-    Header: "DATE",
-    accessor: "date",
+    Header: "VALOR",
+    accessor: "valor",
   },
   {
-    Header: "PROGRESS",
-    accessor: "progress",
+    Header: "% DA META",
+    accessor: "progresso",
   },
 ];
 
 export type ColumnData = Column[];
 
 export type TableData = Column<{
-  name: (string | boolean)[];
-  date: string;
-  progress: number;
-  quantity?: number;
+  nome: (string | boolean)[];
+  valor: string;
+  progresso: number;
+  quantidade: number;
   status?: string;
   artworks?: string;
   rating?: number;

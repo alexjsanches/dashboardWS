@@ -1,73 +1,83 @@
-
-import {
-  Avatar,
-  Box,
-  Flex,
-  FormLabel,
-  Icon,
-  Select,
-  SimpleGrid,
-  useColorModeValue
-} from '@chakra-ui/react'
-// Assets
-// Custom components
-import MiniCalendar from 'components/calendar/MiniCalendar'
-import MiniStatistics from 'components/card/MiniStatistics'
-import IconBox from 'components/icons/IconBox'
-import {
-  MdAddTask,
-  MdAttachMoney,
-  MdBarChart,
-  MdFileCopy
-} from 'react-icons/md'
-import CheckTable from 'views/admin/default/components/CheckTable'
-import ComplexTable from 'views/admin/default/components/ComplexTable'
-import DailyTraffic from 'views/admin/default/components/DailyTraffic'
-import PieCard from 'views/admin/default/components/PieCard'
-import Tasks from 'views/admin/default/components/Tasks'
-import TotalSpent from 'views/admin/default/components/TotalSpent'
-import WeeklyRevenue from 'views/admin/default/components/WeeklyRevenue'
-import Banner from 'views/admin/profile/components/Storage'
-import {
-  columnsDataCheck,
-  columnsDataComplex,
-  TableData
-} from 'views/admin/default/variables/columnsData'
-import tableDataCheck from 'views/admin/default/variables/tableDataCheck.json'
-import tableDataComplex from 'views/admin/default/variables/tableDataComplex.json'
-import { isWindowAvailable } from 'utils/navigation'
-import AdminLayout from 'layouts/admin'
-import { Image } from 'components/image/Image'
-import Usa from 'img/dashboards/usa.png'
+import React, { useState, useEffect } from 'react';
+import { Box, Grid } from '@chakra-ui/react';
+import AdminLayout from 'layouts/admin';
+import Bloco1 from 'views/admin/profile/components/bloco1';
+import DailyTraffic from 'views/admin/default/components/DailyTraffic';
+import Bloco2 from 'views/admin/profile/components/bloco2';
+import CustomToastWithConfetti from 'views/admin/profile/components/confetti';
+import 'styles/Fade.module.css';
 
 export default function UserReports() {
-  // Chakra Color Mode
+  const screens = [
+    {
+      type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
+      duration: 3 * 60 * 1000, // Duração em milissegundos (2 minutos)
+      content: (
+        <Grid
+          templateColumns={{
+            base: '1fr',
+            lg: '2.5fr 2.5fr 2.5fr',
+          }}
+          templateRows={{
+            base: 'repeat(3, 1fr)',
+            lg: '1fr',
+          }}
+          gap={{ base: '20px', xl: '20px' }}
+        >
+          <DailyTraffic />
+          <Bloco1 />
+          <Bloco2 />
+        </Grid>
+      ),
+    },
+    {
+      type: 'gif',
+      duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
+      content: (
+        <img
+          src="/img/resultado.gif"
+          alt="GIF"
+          style={{ width: '100%', height: 'auto' }}
+        />
+      ),
+    },
+    {
+      type: 'gif',
+      duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
+      content: (
+        <img
+          src="/img/campanha.gif"
+          alt="GIF"
+          style={{ width: '100%', height: 'auto' }}
+        />
+      ),
+    },
+    // Adicione mais telas aqui da mesma forma
+  ];
 
-  const brandColor = useColorModeValue('brand.500', 'white')
-  const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100')
+  const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
+
+  useEffect(() => {
+    const nextScreenIndex =
+      currentScreenIndex === screens.length - 1 ? 0 : currentScreenIndex + 1;
+    const screenInterval = setInterval(() => {
+      setCurrentScreenIndex(nextScreenIndex);
+    }, screens[currentScreenIndex].duration);
+
+    return () => {
+      clearInterval(screenInterval);
+    };
+  }, [currentScreenIndex]);
 
   return (
     <AdminLayout>
       <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
-        <>
-          <Flex  mb='20px'>
-            <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
-              <DailyTraffic />
-              <CheckTable columnsData={columnsDataCheck} tableData={(tableDataCheck as unknown) as TableData[]} />
-            </SimpleGrid>
-          </Flex>
-          <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
-            <ComplexTable
-              columnsData={columnsDataComplex}
-              tableData={(tableDataComplex as unknown) as TableData[]}
-            />
-            <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
-              <Tasks />
-              <MiniCalendar h='100%' minW='100%' selectRange={false} />
-            </SimpleGrid>
-          </SimpleGrid>
-        </>
+        <Box mb="20px" className={`fade-transition fade-in`}>
+          {screens[currentScreenIndex].content}
+        </Box>
+        <br />
       </Box>
+      <CustomToastWithConfetti />
     </AdminLayout>
-  )
+  );
 }

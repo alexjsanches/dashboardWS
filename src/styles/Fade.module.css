@@ -1,0 +1,8 @@
+.fade-transition {
+    transition: opacity 0.5s ease-in-out; /* Ajuste a duração e a função de transição conforme desejado */
+    opacity: 0;
+  }
+  
+  .fade-in {
+    opacity: 1;
+  }

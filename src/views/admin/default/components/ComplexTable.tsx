@@ -26,6 +26,7 @@ import Menu from 'components/menu/MainMenu'
 // Assets
 import { MdCheckCircle, MdCancel, MdOutlineError } from 'react-icons/md'
 import { TableProps } from '../variables/columnsData'
+
 export default function ColumnsTable (props: TableProps) {
   const { columnsData, tableData } = props
 
@@ -52,6 +53,7 @@ export default function ColumnsTable (props: TableProps) {
   } = tableInstance
   initialState.pageSize = 5
 
+
   const textColor = useColorModeValue('secondaryGray.900', 'white')
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100')
   return (
@@ -68,7 +70,7 @@ export default function ColumnsTable (props: TableProps) {
           fontWeight='700'
           lineHeight='100%'
         >
-          Complex Table
+          Top 5 Vendedores
         </Text>
         <Menu />
       </Flex>
@@ -103,50 +105,25 @@ export default function ColumnsTable (props: TableProps) {
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
                   let data
-                  if (cell.column.Header === 'NAME') {
+                  if (cell.column.Header === 'NOME') {
                     data = (
                       <Text color={textColor} fontSize='sm' fontWeight='700'>
                         {cell.value}
                       </Text>
                     )
-                  } else if (cell.column.Header === 'STATUS') {
-                    data = (
-                      <Flex align='center'>
-                        <Icon
-                          w='24px'
-                          h='24px'
-                          me='5px'
-                          color={
-                            cell.value === 'Approved'
-                              ? 'green.500'
-                              : cell.value === 'Disable'
-                              ? 'red.500'
-                              : cell.value === 'Error'
-                              ? 'orange.500'
-                              : null
-                          }
-                          as={
-                            cell.value === 'Approved'
-                              ? MdCheckCircle
-                              : cell.value === 'Disable'
-                              ? MdCancel
-                              : cell.value === 'Error'
-                              ? MdOutlineError
-                              : null
-                          }
-                        />
-                        <Text color={textColor} fontSize='sm' fontWeight='700'>
-                          {cell.value}
-                        </Text>
-                      </Flex>
-                    )
-                  } else if (cell.column.Header === 'DATE') {
+                  } else if (cell.column.Header === 'QUANTIDADE') {
                     data = (
                       <Text color={textColor} fontSize='sm' fontWeight='700'>
                         {cell.value}
                       </Text>
                     )
-                  } else if (cell.column.Header === 'PROGRESS') {
+                  } else if (cell.column.Header === 'VALOR') {
+                    data = (
+                      <Text color={textColor} fontSize='sm' fontWeight='700'>
+                        {cell.value}
+                      </Text>
+                    )
+                  } else if (cell.column.Header === '% DA META') {
                     data = (
                       <Flex align='center'>
                         <Progress

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
 const axios = require('axios');
-const cors = require('cors'); // Importe o pacote cors
+const cors = require('cors'); 
 
 // Configurações
 const port = process.env.PORT || 3000;
@@ -14,10 +14,10 @@ const username = 'alexandre.sanches@worldseg.com.br';
 const password = '862485inteliX!';
 const contentType = 'text/xml';
 
-// Use o middleware CORS antes de definir suas rotas
+
 app.use(cors());
 
-// Função para obter um novo Bearer Token
+
 async function getBearerToken() {
   try {
     const response = await fetch(apiEndpoint, {
@@ -46,7 +46,6 @@ async function getBearerToken() {
   }
 }
 
-// Rota para buscar e retornar o Bearer Token
 app.get('/api/token', async (req, res) => {
   try {
     const token = await getBearerToken();
@@ -60,7 +59,7 @@ app.get('/api/token', async (req, res) => {
   }
 });
 
-// Iniciar o servidor
+
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });

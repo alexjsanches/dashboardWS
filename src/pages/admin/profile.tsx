@@ -1,100 +1,83 @@
+import React, { useState, useEffect } from 'react';
+import { Box, Grid } from '@chakra-ui/react';
+import AdminLayout from 'layouts/admin';
+import Bloco1 from 'views/admin/profile/components/bloco1';
+import DailyTraffic from 'views/admin/default/components/DailyTraffic';
+import Bloco2 from 'views/admin/profile/components/bloco2';
+import CustomToastWithConfetti from 'views/admin/profile/components/confetti';
+import 'styles/Fade.module.css';
 
-// Chakra imports
-import { Box, Grid } from '@chakra-ui/react'
-import AdminLayout from 'layouts/admin'
-
-// Custom components
-import Banner from 'views/admin/profile/components/Banner'
-import General from 'views/admin/profile/components/General'
-import Notifications from 'views/admin/profile/components/Notifications'
-import Projects from 'views/admin/profile/components/Projects'
-import Storage from 'views/admin/profile/components/Storage'
-import Upload from 'views/admin/profile/components/Upload'
-
-// Assets
-import banner from 'img/auth/banner.png'
-import avatar from 'img/avatars/avatar4.png'
-
-export default function ProfileOverview () {
-  return (
-    <AdminLayout>
-      <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
-        {/* Main Fields */}
+export default function ProfileOverview() {
+  const screens = [
+    {
+      type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
+      duration: 3 * 60 * 1000, // Duração em milissegundos (2 minutos)
+      content: (
         <Grid
           templateColumns={{
             base: '1fr',
-            lg: '1.34fr 1fr 1.62fr'
+            lg: '2.5fr 2.5fr 2.5fr',
           }}
           templateRows={{
             base: 'repeat(3, 1fr)',
-            lg: '1fr'
+            lg: '1fr',
           }}
           gap={{ base: '20px', xl: '20px' }}
         >
-          <Banner
-            gridArea='1 / 1 / 2 / 2'
-            banner={banner}
-            avatar={avatar}
-            name='Adela Parkson'
-            job='Product Designer'
-            posts='17'
-            followers='9.7k'
-            following='274'
-          />
-          <Storage
-            gridArea={{ base: '2 / 1 / 3 / 2', lg: '1 / 2 / 2 / 3' }}
-            used={25.6}
-            total={50}
-          />
-          <Upload
-            gridArea={{
-              base: '3 / 1 / 4 / 2',
-              lg: '1 / 3 / 2 / 4'
-            }}
-            minH={{ base: 'auto', lg: '420px', '2xl': '365px' }}
-            pe='20px'
-            pb={{ base: '100px', lg: '20px' }}
-          />
+          <DailyTraffic />
+          <Bloco1 />
+          <Bloco2 />
         </Grid>
-        <Grid
-          mb='20px'
-          templateColumns={{
-            base: '1fr',
-            lg: 'repeat(2, 1fr)',
-            '2xl': '1.34fr 1.62fr 1fr'
-          }}
-          templateRows={{
-            base: '1fr',
-            lg: 'repeat(2, 1fr)',
-            '2xl': '1fr'
-          }}
-          gap={{ base: '20px', xl: '20px' }}
-        >
-          <Projects
-            banner={banner}
-            avatar={avatar}
-            name='Adela Parkson'
-            job='Product Designer'
-            posts='17'
-            followers='9.7k'
-            following='274'
-          />
-          <General
-            gridArea={{ base: '2 / 1 / 3 / 2', lg: '1 / 2 / 2 / 3' }}
-            minH='365px'
-            pe='20px'
-          />
-          <Notifications
-            used={25.6}
-            total={50}
-            gridArea={{
-              base: '3 / 1 / 4 / 2',
-              lg: '2 / 1 / 3 / 3',
-              '2xl': '1 / 3 / 2 / 4'
-            }}
-          />
-        </Grid>
+      ),
+    },
+    {
+      type: 'gif',
+      duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
+      content: (
+        <img
+          src="/img/resultado.gif"
+          alt="GIF"
+          style={{ width: '100%', height: 'auto' }}
+        />
+      ),
+    },
+    {
+      type: 'gif',
+      duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
+      content: (
+        <img
+          src="/img/campanha.gif"
+          alt="GIF"
+          style={{ width: '100%', height: 'auto' }}
+        />
+      ),
+    },
+    // Adicione mais telas aqui da mesma forma
+  ];
+
+  const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
+
+  useEffect(() => {
+    const nextScreenIndex =
+      currentScreenIndex === screens.length - 1 ? 0 : currentScreenIndex + 1;
+    const screenInterval = setInterval(() => {
+      setCurrentScreenIndex(nextScreenIndex);
+    }, screens[currentScreenIndex].duration);
+
+    return () => {
+      clearInterval(screenInterval);
+    };
+  }, [currentScreenIndex]);
+
+  return (
+    <AdminLayout>
+      <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
+        <Box mb="20px" className={`fade-transition fade-in`}>
+          {screens[currentScreenIndex].content}
+        </Box>
+        <br />
       </Box>
+      <CustomToastWithConfetti />
     </AdminLayout>
-  )
+  );
 }

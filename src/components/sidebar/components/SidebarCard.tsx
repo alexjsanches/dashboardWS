@@ -43,9 +43,6 @@ export default function SidebarDocs() {
 
   return (
     <div>
-      <Flex mb={15} padding={0} position={'relative'}>
-        
-        </Flex>
       <Flex
         justify='center'
         direction='column'
@@ -55,8 +52,25 @@ export default function SidebarDocs() {
         me='20px'
         position='relative'
       >
-
-        {/* ------------------------------------------Vou colocar aqui data e Hora------------------------------------- */}
+         <iframe
+        src="https://www.instagram.com/p/CxVl-I4rGUV/embed"
+        width="100%"
+        height="400px"
+        scrolling="no"
+        allowtransparency="true"
+      ></iframe>
+        
+      </Flex>
+      <br></br>
+      <Flex
+        justify='center'
+        direction='column'
+        align='center'
+        bg={bgColor}
+        borderRadius='30px'
+        me='20px'
+        position='relative'
+      >
         <Flex
           direction='column'
           mb='12px'

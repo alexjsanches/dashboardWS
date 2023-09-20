@@ -1,9 +1,10 @@
 // Chakra imports
+import React, { useState, useEffect } from 'react';
 import { Box, Flex, Text, Select, useColorModeValue } from '@chakra-ui/react';
 // Custom components
 import Card from 'components/card/Card';
 import PieChart from 'components/charts/PieChart';
-import { pieChartData, pieChartOptions } from 'variables/charts';
+import { pieChartOptions } from 'variables/charts';
 import { VSeparator } from 'components/separator/Separator';
 export default function Conversion(props: { [x: string]: any }) {
 	const { ...rest } = props;
@@ -12,6 +13,8 @@ export default function Conversion(props: { [x: string]: any }) {
 	const textColor = useColorModeValue('secondaryGray.900', 'white');
 	const cardColor = useColorModeValue('white', 'navy.700');
 	const cardShadow = useColorModeValue('0px 18px 40px rgba(112, 144, 176, 0.12)', 'unset');
+	const [chartData, setChartData] = useState<number[]>([]);
+
 	return (
 		<Card p='20px' alignItems='center' flexDirection='column' w='100%' {...rest}>
 			<Flex
@@ -30,7 +33,7 @@ export default function Conversion(props: { [x: string]: any }) {
 				</Select>
 			</Flex>
 
-			<PieChart h='100%' w='100%' chartData={pieChartData} chartOptions={pieChartOptions} />
+			<PieChart h='100%' w='100%' chartData={chartData} chartOptions={pieChartOptions} />
 			<Card
 				bg={cardColor}
 				flexDirection='row'
@@ -38,7 +41,6 @@ export default function Conversion(props: { [x: string]: any }) {
 				w='100%'
 				p='15px'
 				px='20px'
-				mt='15px'
 				mx='auto'>
 				<Flex direction='column' py='5px'>
 					<Flex align='center'>
@@ -48,7 +50,7 @@ export default function Conversion(props: { [x: string]: any }) {
 						</Text>
 					</Flex>
 					<Text fontSize='lg' color={textColor} fontWeight='700'>
-						63%
+						53.3%
 					</Text>
 				</Flex>
 				<VSeparator mx={{ base: '60px', xl: '60px', '2xl': '60px' }} />
@@ -60,7 +62,7 @@ export default function Conversion(props: { [x: string]: any }) {
 						</Text>
 					</Flex>
 					<Text fontSize='lg' color={textColor} fontWeight='700'>
-						25%
+						46.7%
 					</Text>
 				</Flex>
 			</Card>
