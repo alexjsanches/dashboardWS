@@ -57,7 +57,7 @@ export default function SidebarDocs() {
         width="100%"
         height="400px"
         scrolling="no"
-        allowtransparency="true"
+        
       ></iframe>
         
       </Flex>
