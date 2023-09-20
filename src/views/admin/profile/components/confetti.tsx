@@ -1,8 +1,8 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, CSSProperties } from "react";
 import { useToast, Box, Button } from "@chakra-ui/react";
 import ReactCanvasConfetti from "react-canvas-confetti";
 
-const canvasStyles = {
+const canvasStyles: CSSProperties = {
   position: "fixed",
   pointerEvents: "none",
   width: "100%",
@@ -14,14 +14,14 @@ const canvasStyles = {
 
 export default function CustomToastWithConfetti() {
   const toast = useToast();
-  const refAnimationInstance = useRef(null);
+  const refAnimationInstance = useRef(null); // Deixar sem especificar o tipo
 
-  const getInstance = useCallback((instance) => {
+  const getInstance = useCallback((instance: any) => {
     refAnimationInstance.current = instance;
   }, []);
 
   const makeShot = useCallback(
-    (particleRatio, opts) => {
+    (particleRatio: number, opts: any) => {
       refAnimationInstance.current &&
         refAnimationInstance.current({
           ...opts,
