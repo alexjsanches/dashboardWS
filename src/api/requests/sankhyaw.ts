@@ -58,7 +58,7 @@ export async function fetchAndFormatData(token: string): Promise<{ formattedValu
 // Função para obter o token
 export async function getToken(): Promise<string | null> {
   try {
-    const tokenResponse = await axios.get('http://192.168.1.30:3000/api/token');
+    const tokenResponse = await axios.get('https://serverws.onrender.com/api/token');
     return tokenResponse.data.token;
   } catch (error) {
     console.error('Erro ao obter o token:', error);
