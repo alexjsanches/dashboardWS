@@ -8,7 +8,7 @@ export default function Bloco1() {
   const [gynSFormat, setGynSFormat] = useState<number | null>(null);
   const metaGyn = 3824678.76; 
   const diasUteisNoMes = 20;
-  const diasConcluidos = 12;
+  const diasConcluidos = 13;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const tendencia = (gynSFormat / diasConcluidos) * diasUteisNoMes; 
 

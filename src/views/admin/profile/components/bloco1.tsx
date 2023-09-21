@@ -8,7 +8,7 @@ export default function Bloco1() {
   const [udiSFormat, setUdiSFormat] = useState<number | null>(null);
   const metaUdi = 3129282.73; 
   const diasUteisNoMes = 20;
-  const diasConcluidos = 12;
+  const diasConcluidos = 13;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const tendencia = (udiSFormat / diasConcluidos) * diasUteisNoMes; 
 

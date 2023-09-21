@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid } from '@chakra-ui/react';
+import { AspectRatio, Box, Grid } from '@chakra-ui/react';
 import AdminLayout from 'layouts/admin';
 import Bloco1 from 'views/admin/profile/components/bloco1';
 import DailyTraffic from 'views/admin/default/components/DailyTraffic';
 import Bloco2 from 'views/admin/profile/components/bloco2';
 import CustomToastWithConfetti from 'views/admin/profile/components/confetti';
 import 'styles/Fade.module.css';
+import { Grafico } from 'views/admin/default/components/Grafico';
+
 
 export default function UserReports() {
   const screens = [
@@ -78,6 +80,8 @@ export default function UserReports() {
         <br />
       </Box>
       <CustomToastWithConfetti />
+      <Grafico />
+      
     </AdminLayout>
   );
 }

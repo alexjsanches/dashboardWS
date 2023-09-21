@@ -6,6 +6,7 @@ import { VSeparator } from 'components/separator/Separator';
 import { RiArrowUpSFill } from 'react-icons/ri';
 import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw'; // Importe a função getToken
 import { iniChartData, pieChartOptions } from 'variables/charts';
+import { Grafico } from './Grafico';
 
 
 
@@ -144,7 +145,7 @@ export default function DailyTraffic({ ...rest }) {
       {isLoadingData ? (
               <SkeletonCircle size='40'/>
             ) : (
-        <PieChart h='100%' w='100%' chartData={chartData} chartOptions={pieChartOptions} />
+        <Grafico />
             )}
         <Card
           bg={cardColor}
