@@ -72,11 +72,7 @@ export default function DailyTraffic({ ...rest }) {
 
     fetchData();
 
-    const intervalId = setInterval(fetchData, 10000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
+    
   }, []);
 
   return (
