@@ -1,7 +1,14 @@
 import { Box, Spacer, Badge, Flex, Text, Skeleton } from '@chakra-ui/react';
 import Card from 'components/card/Card';
+interface Props {
+  diasFaltantes: number;
+  isLoadingData: boolean;
+  metaGyn: number;
+  metaDiariaCalcGYN: number;
+  tendenciaGYN: number;
+}
 
-export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiariaCalcGYN, tendenciaGYN}) {
+export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiariaCalcGYN, tendenciaGYN}: Props) {
 
  
   return (
