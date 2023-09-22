@@ -3,8 +3,9 @@ import { Box, Flex, Icon, Text, useColorModeValue, Badge,Skeleton, SkeletonCircl
 import Card from 'components/card/Card';
 import { VSeparator } from 'components/separator/Separator';
 import { RiArrowUpSFill } from 'react-icons/ri';
-import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw'; 
+import { fetchAndFormatData, getToken } from 'api/requests/Fatur_diarioGeral'; 
 import { Grafico } from './Grafico';
+import StatusIndicator from './StatusIndicator';
 
 
 
@@ -17,7 +18,7 @@ export default function DailyTraffic({ ...rest }) {
     ];
     const today = new Date();
     const yesterday = new Date(today);
-    yesterday.setDate(today.getDate() - 1);
+    yesterday.setDate(today.getDate());
   
     const day = yesterday.getDate().toString().padStart(2, '0');
     const monthIndex = yesterday.getMonth();
@@ -76,9 +77,10 @@ export default function DailyTraffic({ ...rest }) {
       <Text fontSize='lg' fontWeight='bold'>
         Por Unidade
       </Text>
-      <Badge ml='1' fontSize='0.8em' colorScheme='purple'>
-          Atualizado até {getYesterdayFormatted()}
+      <Badge ml='10' fontSize='0.8em' colorScheme='purple'>
+          Dados ao vivo
         </Badge>
+        <StatusIndicator />
       </Flex>
       <Flex justify='space-between' align='start' pt='5px' w='100%'>
         <Flex flexDirection='column' align='start'>

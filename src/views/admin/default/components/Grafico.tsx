@@ -7,7 +7,7 @@ export function Grafico() {
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const [isLoadingData, setIsLoadingData] = useState(true);
+
   const [udiSFormat, setUdiSFormat] = useState<number | null>(null);
   const [gynSFormat, setGynSFormat] = useState<number | null>(null);
   const metaUdi = 3129282.73;
@@ -24,7 +24,6 @@ const [isLoadingData, setIsLoadingData] = useState(true);
             const { udiSFormat, gynSFormat } = response;
             setUdiSFormat(udiSFormat);
             setGynSFormat(gynSFormat);
-            setIsLoadingData(false);
           } else {
             console.error('Erro ao formatar os dados.');
           }
@@ -49,25 +48,29 @@ const data = {
   series: [
     {
       name: 'Previsto UDI',
-      data: [metaUdi]
+      data: [metaUdi],
+      color: '#775DD0',
     },
     {
       name: 'Realizado UDI',
-      data: [udiSFormat]
+      data: [udiSFormat],
+      color: '#00E396',
     }, 
     {
       name: 'Previsto GYN',
-      data: [ metaGyn]
+      data: [ metaGyn],
+      color: '#775DD0',
     },
     {
       name: 'Realizado GYN',
-      data: [gynSFormat]
+      data: [gynSFormat],
+      color: '#00E396'
     }, 
     
 ],
   options: {
     chart: {
-      height: 430,
+      height: 400,
       toolbar: {
         show: false,
       }
@@ -92,6 +95,9 @@ const data = {
       show: true,
       width: 1,
       colors: ['#fff']
+    },
+    yaxis: {
+      show: false,
     },
   },
 };
