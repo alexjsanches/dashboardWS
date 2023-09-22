@@ -3,7 +3,7 @@ import { GOL } from '../interfaces/GOL';
 import { apiLink, contentType, payloadReq } from '../payloads/GOL_Diario';
 
 
-export async function fetchAndFormatData(token: string): Promise<{ formattedValue1: string, formattedValue2: string, percentValue1: number, percentValue2: number, udiSFormat: number, gynSFormat: number } | null> {
+export async function fetchAndFormatDataHj(token: string): Promise<{ udiSFormatHj: number, gynSFormatHj: number } | null> {
   try {
     const apiUrl = apiLink;
     const xmlPayload = payloadReq;
@@ -33,15 +33,10 @@ export async function fetchAndFormatData(token: string): Promise<{ formattedValu
       });
 
       const [udiValue, gynValue] = totalValues;
-      const total = udiValue + gynValue;
 
       const formattedValues = {
-        formattedValue1: udiValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-        formattedValue2: gynValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-        percentValue1: (udiValue / total) * 100,
-        percentValue2: (gynValue / total) * 100,
-        udiSFormat: udiValue,
-        gynSFormat: gynValue,
+        udiSFormatHj: udiValue,
+        gynSFormatHj: gynValue,
       };
 
       return formattedValues;
@@ -56,7 +51,7 @@ export async function fetchAndFormatData(token: string): Promise<{ formattedValu
 }
 
 // Função para obter o token
-export async function getToken(): Promise<string | null> {
+export async function getTokenHj(): Promise<string | null> {
   try {
     const tokenResponse = await axios.get('https://serverws.onrender.com/api/token');
     return tokenResponse.data.token;
@@ -68,9 +63,9 @@ export async function getToken(): Promise<string | null> {
 
 // Função principal que obtém o token e depois chama fetchAndFormatData
 export async function fetchDataWithToken() {
-  const token = await getToken();
+  const token = await getTokenHj();
   if (token) {
-    const formattedData = await fetchAndFormatData(token);
+    const formattedData = await fetchAndFormatDataHj(token);
     if (formattedData) {
       console.log('Dados formatados:', formattedData);
     } else {

@@ -1,40 +1,13 @@
 import dynamic from 'next/dynamic';
-import { useState, useEffect } from 'react';
-import { fetchAndFormatData, getToken } from 'api/requests/Und_FaturDiario';
 
-export function MetaUdi() {
+interface Props {
+  udiSFormatHj: number;
+  metaDiariaCalcUDI: number;
+}
+
+export function MetaUdi({udiSFormatHj,metaDiariaCalcUDI}: Props) {
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
-
-
-  const [udiSFormat, setUdiSFormat] = useState<number | null>(null);
-  const metaUdi = 156464.14;
-  
-  
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const token = await getToken();
-        if (token !== null) {
-          const response = await fetchAndFormatData(token);
-          if (response !== null) {
-            const { udiSFormat } = response;
-            setUdiSFormat(udiSFormat);
-          } else {
-            console.error('Erro ao formatar os dados.');
-          }
-        } else {
-          console.error('Não foi possível obter o token.');
-        }
-      } catch (error) {
-        console.error('Erro na requisição:', error);
-      }
-    }
-
-    fetchData();
-
-    
-  }, []);
 
 const data = {
     series: [
@@ -43,11 +16,11 @@ const data = {
           data: [
             {
               x: 'UDI',
-              y: udiSFormat,
+              y: udiSFormatHj,
               goals: [
                 {
                   name: 'Meta',
-                  value: metaUdi,
+                  value: metaDiariaCalcUDI,
                   strokeHeight: 5,
                   strokeColor: '#775DD0'
                 }

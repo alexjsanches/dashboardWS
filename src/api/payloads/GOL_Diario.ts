@@ -2,25 +2,28 @@ export const apiLink = 'https://api.sankhya.com.br/gateway/v1/mge/service.sbr?se
 
 
 // Função para obter a data de ontem no formato "DD/MM/YYYY"
-const getYesterday = () => {
+const getTodayStart = () => {
   const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(today.getDate() - 1);
-  return `${yesterday.getDate().toString().padStart(2, '0')}/${(yesterday.getMonth() + 1).toString().padStart(2, '0')}/${yesterday.getFullYear()}`;
+  const startOfDay = new Date(today);
+  startOfDay.setHours(0, 0, 0, 0);
+  return startOfDay;
+};
+
+const getCurrentTime = () => {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  return `${hours}:${minutes}:${seconds}`;
 };
 
 export let payloadReq = `
   <serviceRequest serviceName="VendasGOLSP.getVendasFaturamento">
     <requestBody>
-      <vendas PERIODO.INI="${getYesterday()}" PERIODO.FIN="${getYesterday()}" TIPO="VENDEDOR" _id="-50" CONFIG_CONSOLIDACAO="5" EMPRESA="999,4,2,3,1,100" GERENTESUBORDINADO="false" TIPO_AGRUPAMENTO="G"/>
+      <vendas PERIODO.INI="${getTodayStart().toLocaleDateString()} 00:00:00" PERIODO.FIN="${getTodayStart().toLocaleDateString()} 23:59:59" TIPO="VENDEDOR" _id="-50" CONFIG_CONSOLIDACAO="-1" EMPRESA="999,4,2,3,1,100" GERENTESUBORDINADO="false" TIPO_AGRUPAMENTO="G"/>
       <clientEventList/>
     </requestBody>
   </serviceRequest>
 `;
 console.log(payloadReq)
 export const contentType = 'text/xml';
-
-// Função para atualizar a variável payloadReq
-export const updatePayloadReq = (newPayload: string) => {
-  payloadReq = newPayload;
-};

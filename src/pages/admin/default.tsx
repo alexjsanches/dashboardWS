@@ -8,14 +8,15 @@ import CustomToastWithConfetti from 'views/admin/profile/components/confetti';
 import 'styles/Fade.module.css';
 import Bloco3 from 'views/admin/profile/components/bloco3';
 import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw';
+import { fetchAndFormatDataHj, getTokenHj } from 'api/requests/Und_FaturDiario';
 
 export default function UserReports() {
 
     const [isLoadingData,setIsLoadingData] = useState(true);
     const [udiSFormat,setUdiSFormat] = useState < number | null > (null);
     const [gynSFormat,setGynSFormat] = useState < number | null > (null);
-    const metaDiariaUdi = 156464.14;
-    const metaDiariaGyn = 191233.94;
+    const [udiSFormatHj,setUdiSFormatHj] = useState < number | null > (null);
+    const [gynSFormatHj,setGynSFormatHj] = useState < number | null > (null);
     const metaUdi = 3129282.73;
     const metaGyn = 3824678.76; 
     const diasUteisNoMes = 20;
@@ -37,6 +38,8 @@ export default function UserReports() {
               const { udiSFormat, gynSFormat } = response;
               setUdiSFormat(udiSFormat);
               setGynSFormat(gynSFormat);
+              setUdiSFormatHj(udiSFormatHj);
+              setGynSFormatHj(gynSFormatHj);
               setIsLoadingData(false);
             } else {
               console.error('Erro ao formatar os dados.');
@@ -52,6 +55,36 @@ export default function UserReports() {
       fetchData();
     }, []);
 
+    useEffect(() => {
+        async function fetchDataHj() {
+          try {
+            const token = await getTokenHj();
+            if (token !== null) {
+              const response = await fetchAndFormatDataHj(token);
+              if (response !== null) {
+                const { udiSFormatHj, gynSFormatHj } = response;
+                setUdiSFormatHj(udiSFormatHj);
+                setGynSFormatHj(gynSFormatHj);
+                setIsLoadingData(false);
+              } else {
+                console.error('Erro ao formatar os dados.');
+              }
+            } else {
+              console.error('Não foi possível obter o token.');
+            }
+          } catch (error) {
+            console.error('Erro na requisição:', error);
+          }
+        }
+    
+        fetchDataHj();
+        const intervalId = setInterval(fetchDataHj, 10000);
+
+        return () => {
+          clearInterval(intervalId);
+        };
+      }, []);
+  
 
 
     const screens = [
@@ -78,7 +111,7 @@ export default function UserReports() {
                         <Bloco2  diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaGyn={metaGyn} metaDiariaCalcGYN={metaDiariaCalcGYN} tendenciaGYN={tendenciaGYN}/>
                     </Grid>
                     <Box mt='15'>
-                        <Bloco3/>
+                        <Bloco3 isLoadingData={isLoadingData} udiSFormatHj={udiSFormatHj} gynSFormatHj={gynSFormatHj} metaDiariaCalcUDI={metaDiariaCalcUDI} metaDiariaCalcGYN={metaDiariaCalcGYN} />
                     </Box>
                 </div>
             )
