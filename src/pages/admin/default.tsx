@@ -74,8 +74,8 @@ export default function UserReports() {
                         xl: '20px'
                     }}>
                         <DailyTraffic/>
-                        <Bloco1  diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaUdi={metaUdi} metaDiariaCalcUDI={metaDiariaCalcUDI} diasUteisNoMes={diasUteisNoMes} diasConcluidos={diasConcluidos} tendenciaUDI={tendenciaUDI} />
-                        <Bloco2  diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaGyn={metaGyn} metaDiariaCalcGYN={metaDiariaCalcGYN} diasUteisNoMes={diasUteisNoMes} diasConcluidos={diasConcluidos} tendenciaGYN={tendenciaGYN}/>
+                        <Bloco1  diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaUdi={metaUdi} metaDiariaCalcUDI={metaDiariaCalcUDI}  tendenciaUDI={tendenciaUDI} />
+                        <Bloco2  diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaGyn={metaGyn} metaDiariaCalcGYN={metaDiariaCalcGYN} tendenciaGYN={tendenciaGYN}/>
                     </Grid>
                     <Box mt='15'>
                         <Bloco3/>
