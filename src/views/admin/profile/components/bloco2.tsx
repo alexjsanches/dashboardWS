@@ -1,50 +1,8 @@
 import { Box, Spacer, Badge, Flex, Text, Skeleton } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
 import Card from 'components/card/Card';
-import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw';
 
-export default function Bloco1() {
-  const [isLoadingData, setIsLoadingData] = useState(true);
-  const [gynSFormat, setGynSFormat] = useState<number | null>(null);
-  const metaGyn = 3824678.76; 
-  const diasUteisNoMes = 20;
-  const diasConcluidos = 13;
-  const diasFaltantes = diasUteisNoMes - diasConcluidos;
-  const tendencia = (gynSFormat / diasConcluidos) * diasUteisNoMes; 
+export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiariaCalcGYN, tendenciaGYN}) {
 
-  const metaDiaria = gynSFormat !== 0 ? (metaGyn - gynSFormat) / diasFaltantes : 0;
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const token = await getToken();
-        if (token !== null) {
-          const response = await fetchAndFormatData(token);
-          if (response !== null) {
-            const { gynSFormat } = response;
-            setGynSFormat(gynSFormat);
-            setIsLoadingData(false);
-          } else {
-            console.error('Erro ao formatar os dados.');
-          }
-        } else {
-          console.error('Não foi possível obter o token.');
-        }
-      } catch (error) {
-        console.error('Erro na requisição:', error);
-      }
-    }
-
-    fetchData();
-
-    const intervalId = setInterval(fetchData, 10000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
-  
-  
  
   return (
     <div>
@@ -117,7 +75,7 @@ export default function Bloco1() {
               <Skeleton height="20px" width="250px" />
             ) : (
               <Text color='gray.700' fontSize='35px' fontWeight='700' lineHeight='100%'>
-                {metaDiaria.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                {metaDiariaCalcGYN.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </Text>
             )}
           </Flex>
@@ -155,7 +113,7 @@ export default function Bloco1() {
               <Skeleton height="20px" width="250px" />
             ) : (
             <Text color='red.500' fontSize='35px' fontWeight='700' lineHeight='100%'>
-            {tendencia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}   
+            {tendenciaGYN.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}   
             </Text>
             )}
           </Flex>

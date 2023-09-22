@@ -1,51 +1,8 @@
 import { Box, Spacer, Badge, Flex, Text, Skeleton } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
 import Card from 'components/card/Card';
-import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw';
 
-export default function Bloco1() {
-  const [isLoadingData, setIsLoadingData] = useState(true);
-  const [udiSFormat, setUdiSFormat] = useState<number | null>(null);
-  const metaUdi = 3129282.73; 
-  const diasUteisNoMes = 20;
-  const diasConcluidos = 13;
-  const diasFaltantes = diasUteisNoMes - diasConcluidos;
-  const tendencia = (udiSFormat / diasConcluidos) * diasUteisNoMes; 
-
-  const metaDiaria = udiSFormat !== 0 ? (metaUdi - udiSFormat) / diasFaltantes : 0;
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const token = await getToken();
-        if (token !== null) {
-          const response = await fetchAndFormatData(token);
-          if (response !== null) {
-            const { udiSFormat } = response;
-            setUdiSFormat(udiSFormat);
-            setIsLoadingData(false);
-          } else {
-            console.error('Erro ao formatar os dados.');
-          }
-        } else {
-          console.error('Não foi possível obter o token.');
-        }
-      } catch (error) {
-        console.error('Erro na requisição:', error);
-      }
-    }
-
-    fetchData();
-
-    const intervalId = setInterval(fetchData, 10000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiariaCalcUDI, tendenciaUDI}) {
   
-  
- 
   return (
     <div>
       
@@ -118,7 +75,7 @@ export default function Bloco1() {
               <Skeleton height="20px" width="250px" />
             ) : (
             <Text color='gray.700' fontSize='35px' fontWeight='700' lineHeight='100%'>
-            {metaDiaria.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} 
+            {metaDiariaCalcUDI.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} 
             </Text>
             )}
           </Flex>
@@ -156,7 +113,7 @@ export default function Bloco1() {
               <Skeleton height="20px" width="250px" />
             ) : (
             <Text color='red.500' fontSize='35px' fontWeight='700' lineHeight='100%'>
-            {tendencia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}   
+            {tendenciaUDI.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}   
             </Text>
             )}
           </Flex>

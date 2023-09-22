@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Flex, Icon, Text, useColorModeValue, Badge,Skeleton, SkeletonCircle } from '@chakra-ui/react';
-import PieChart from 'components/charts/PieChart';
 import Card from 'components/card/Card';
 import { VSeparator } from 'components/separator/Separator';
 import { RiArrowUpSFill } from 'react-icons/ri';
-import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw'; // Importe a função getToken
-import { iniChartData, pieChartOptions } from 'variables/charts';
+import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw'; 
 import { Grafico } from './Grafico';
 
 
@@ -33,7 +31,6 @@ export default function DailyTraffic({ ...rest }) {
   const [formattedValue2, setFormattedValue2] = useState<string | null>('Carregando...');
   const [percentageValue1, setPercentageValue1] = useState<number | null>(50);
   const [percentageValue2, setPercentageValue2] = useState<number | null>(50);
-  const [chartData, setChartData] = useState<number[]>([]);
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const cardColor = useColorModeValue('white', 'navy.700');
   const cardShadow = useColorModeValue('0px 18px 40px rgba(112, 144, 176, 0.12)', 'unset');
@@ -54,8 +51,6 @@ export default function DailyTraffic({ ...rest }) {
             setPercentageValue1(percentValue1);
             setPercentageValue2(percentValue2);
             setIsLoadingData(false);
-
-            setChartData([percentValue1, percentValue2]); // Atualize chartData com os valores
           } else {
             console.error('Erro ao formatar os dados.');
           }
