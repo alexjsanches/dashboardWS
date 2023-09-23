@@ -23,6 +23,7 @@ export async function fetchAndFormatDataHj(token: string): Promise<{ udiSFormatH
     const xmlDoc = parser.parseFromString(xmlResponse, contentType);
     const jsonText = xmlDoc.querySelector('json').textContent;
     const data = JSON.parse(jsonText);
+    console.log(data);
 
     if (data && data.result) {
       const totalValues = Object.values(data.result).map((result) => {

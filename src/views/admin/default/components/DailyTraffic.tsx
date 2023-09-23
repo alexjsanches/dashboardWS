@@ -11,21 +11,6 @@ import StatusIndicator from './StatusIndicator';
 
 
 export default function DailyTraffic({ ...rest }) {
-  const getYesterdayFormatted = () => {
-    const months = [
-      'JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN',
-      'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'
-    ];
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(today.getDate());
-  
-    const day = yesterday.getDate().toString().padStart(2, '0');
-    const monthIndex = yesterday.getMonth();
-    const month = months[monthIndex];
-    
-    return `${day}-${month}`;
-  };
   
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [formattedValue1, setFormattedValue1] = useState<string | null>('Carregando...');

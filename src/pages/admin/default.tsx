@@ -15,7 +15,7 @@ export default function UserReports() {
     const [isLoadingData,setIsLoadingData] = useState(true);
     const [udiSFormat,setUdiSFormat] = useState < number | null > (null);
     const [gynSFormat,setGynSFormat] = useState < number | null > (null);
-    const [udiSFormatHj,setUdiSFormatHj] = useState < number | null > (null);
+    const [udiSFormatHj,setUdiSFormatHj] = useState < number | null  > (null);
     const [gynSFormatHj,setGynSFormatHj] = useState < number | null > (null);
     const metaUdi = 3129282.73;
     const metaGyn = 3824678.76; 
@@ -38,8 +38,6 @@ export default function UserReports() {
               const { udiSFormat, gynSFormat } = response;
               setUdiSFormat(udiSFormat);
               setGynSFormat(gynSFormat);
-              setUdiSFormatHj(udiSFormatHj);
-              setGynSFormatHj(gynSFormatHj);
               setIsLoadingData(false);
             } else {
               console.error('Erro ao formatar os dados.');

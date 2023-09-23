@@ -4,7 +4,7 @@ import {
     Badge,
     Flex,
     Text,
-    Skeleton,
+    Skeleton
 } from '@chakra-ui/react';
 import Card from 'components/card/Card';
 import {MetaUdi} from 'views/admin/default/components/MetaUdi_dia';
@@ -49,13 +49,16 @@ export default function Bloco3({udiSFormatHj, isLoadingData, gynSFormatHj, metaD
                         ? (<Skeleton height="20px" width="250px"/>)
                         : (
                             <Text color='green.500' fontSize='35px' fontWeight='700' lineHeight='100%'>
-                                {udiSFormatHj !== null
+                                {udiSFormatHj !== null && udiSFormatHj !== undefined
                                     ? udiSFormatHj.toLocaleString('pt-BR', {
                                         style: 'currency',
                                         currency: 'BRL'
                                     })
-                                    : "Carregando"
+                                    : udiSFormatHj === undefined
+                                        ? "R$ 0,00"
+                                        : "Carregando"
 }
+
                             </Text>
                         )}
 
@@ -93,12 +96,14 @@ export default function Bloco3({udiSFormatHj, isLoadingData, gynSFormatHj, metaD
                         ? (<Skeleton height="20px" width="250px"/>)
                         : (
                             <Text color='green.500' fontSize='35px' fontWeight='700' lineHeight='100%'>
-                                {gynSFormatHj !== null
+                                {gynSFormatHj !== null && gynSFormatHj !== undefined
                                     ? gynSFormatHj.toLocaleString('pt-BR', {
                                         style: 'currency',
                                         currency: 'BRL'
                                     })
-                                    : "Carregando"
+                                    : gynSFormatHj === undefined
+                                        ? "R$ 0,00"
+                                        : "Carregando"
 }
                             </Text>
                         )}
