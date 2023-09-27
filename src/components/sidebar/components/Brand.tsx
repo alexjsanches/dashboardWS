@@ -6,14 +6,13 @@ import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { HSeparator } from 'components/separator/Separator';
 
 export function SidebarBrand() {
-	//   Chakra color mode
 	let logoColor = useColorModeValue('navy.700', 'white');
 
 	return (
-		<Flex alignItems='center' flexDirection='column'>
+		<Flex alignItems='center' flexDirection='column'  >
 			<img
-  style={{ height: "80px", width: "235px" }}
-  src="https://images.tcdn.com.br/files/1134796/themes/17/img/settings/WorldSegLogo.png"
+  style={{ height: "auto", width: "260px", marginTop: "15px", marginBottom: "10px" }}
+  src="/img/logo.gif"
   alt="Descrição da imagem"
 />
 

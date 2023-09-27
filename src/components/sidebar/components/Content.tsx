@@ -16,7 +16,7 @@ function SidebarContent(props: SidebarContentProps) {
 	const { routes } = props;
 	// SIDEBAR
 	return (
-		<Flex direction='column' height='100%' pt='35px' borderRadius='30px'>
+		<Flex direction='column'  borderRadius='30px' >
 			<Brand />
 			<Box ps='20px' pe={{ lg: '16px', '2xl': '20px' }}  mb='40px' borderRadius='30px'>
 				<SidebarCard />

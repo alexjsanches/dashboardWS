@@ -88,54 +88,54 @@ export default function ProfileOverview() {
 
 
     const screens = [
-        {
-            type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
-            duration: 3 * 60 * 1000, // Duração em milissegundos (2 minutos)
-            content: (
-                <div>
-                    <Grid
-                        templateColumns={{
-                        base: '1fr',
-                        lg: '2.5fr 2.5fr 2.5fr'
-                    }}
-                        templateRows={{
-                        base: 'repeat(3, 1fr)',
-                        lg: '1fr'
-                    }}
-                        gap={{
-                        base: '20px',
-                        xl: '20px'
-                    }}>
-                        <DailyTraffic/>
-                        <Bloco1 diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaUdi={metaUdi} metaDiariaCalcUDI={metaDiariaCalcUDI}  tendenciaUDI={tendenciaUDI} />
-                        <Bloco2  diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaGyn={metaGyn} metaDiariaCalcGYN={metaDiariaCalcGYN} tendenciaGYN={tendenciaGYN}/>
-                    </Grid>
-                    <Box mt='15'>
-                        <Bloco3 isLoadingData={isLoadingData} udiSFormatHj={udiSFormatHj} gynSFormatHj={gynSFormatHj} metaDiariaCalcUDI={metaDiariaCalcUDI} metaDiariaCalcGYN={metaDiariaCalcGYN}/>
-                    </Box>
-                </div>
-            )
-        }, {
-            type: 'gif',
-            duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
-            content: (<img
-                src="/img/resultado.gif"
-                alt="GIF"
-                style={{
-                width: '100%',
-                height: 'auto'
-            }}/>)
-        }, {
-            type: 'gif',
-            duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
-            content: (<img
-                src="/img/campanha.gif"
-                alt="GIF"
-                style={{
-                width: '100%',
-                height: 'auto'
-            }}/>)
-        },
+      {
+        type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
+        duration: 3 * 60 * 1000, // Duração em milissegundos (2 minutos)
+        content: (
+            <div>
+                <Grid
+                    templateColumns={{
+                    base: '1fr',
+                    lg: '2.5fr 2.5fr 2.5fr'
+                }}
+                    templateRows={{
+                    base: 'repeat(3, 1fr)',
+                    lg: '1fr'
+                }}
+                    gap={{
+                    base: '20px',
+                    xl: '20px'
+                }}>
+                    <DailyTraffic/>
+                    <Bloco1 diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaUdi={metaUdi} metaDiariaCalcUDI={metaDiariaCalcUDI}  tendenciaUDI={tendenciaUDI} />
+                    <Bloco2  diasFaltantes={diasFaltantes} isLoadingData={isLoadingData} metaGyn={metaGyn} metaDiariaCalcGYN={metaDiariaCalcGYN} tendenciaGYN={tendenciaGYN}/>
+                </Grid>
+                <Box mt='15'>
+                    <Bloco3 isLoadingData={isLoadingData} udiSFormatHj={udiSFormatHj} gynSFormatHj={gynSFormatHj} metaDiariaCalcUDI={metaDiariaCalcUDI} metaDiariaCalcGYN={metaDiariaCalcGYN}/>
+                </Box>
+            </div>
+        )
+    }, {
+        type: 'gif',
+        duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
+        content: (<img
+            src="/img/resultado.gif"
+            alt="GIF"
+            style={{
+            width: '100%',
+            height: 'auto'
+        }}/>)
+    }, {
+        type: 'gif',
+        duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
+        content: (<img
+            src="/img/campanha.gif"
+            alt="GIF"
+            style={{
+            width: '100%',
+            height: 'auto'
+        }}/>)
+    },
         // Adicione mais telas aqui da mesma forma
     ];
 
