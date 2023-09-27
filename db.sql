@@ -1,202 +1,180 @@
 SELECT
-    CAB.CODEMP AS "Empresa",
-    CAB.NUNOTA AS "Nro. Unico",
-    CAB.NUMNOTA AS "Nro. Nota",
-    TO_DATE (CAB.DTNEG, 'DD/MM/YY') AS "Dt. Negociação",
-    TO_DATE (CAB.DTENTSAI, 'DD/MM/YY') AS "Dt. Ent/Sai",
-    CGM.DTREF AS "Dt. Ref",
-    UPPER(TIM_MONTHEXT(CAB.DTENTSAI)) AS "Mês",
-    PAN_ANO(CAB.DTENTSAI) AS "Ano",
-    CAB.CODPARC AS "Cód. Parceiro",
-    PAR.RAZAOSOCIAL AS "Razão Social",
-    CID.NOMECID AS "Cidade",
-    UF.UF AS "UF",
-    UF.DESCRICAO AS "Estado",
-    'BRASIL' AS "País",
-    CAB.TIPMOV AS "Tipo Movimento",
-    CASE
-        WHEN CAB.TIPMOV = 'V' THEN 'VENDA'
-        WHEN CAB.TIPMOV = 'D' THEN 'DEVOLUÇÃO'
-        ELSE 'VERIFICAR COM O MARCELO'
-    END AS "Descrição Movimento",
-    CASE
-        WHEN GER.CODVEND = 0
-        AND CAB.CODEMP = 1 THEN 'UBERLANDIA'
-        WHEN GER.CODVEND = 0
-        AND CAB.CODEMP = 2 THEN 'CATALAO'
-        WHEN GER.CODVEND = 0
-        AND CAB.CODEMP = 3 THEN 'GOIANIA'
-        ELSE GER.APELIDO
-    END AS "Gerente",
-    CAB.CODVEND AS "Cód. Vendedor",
-    VEN.APELIDO AS "Vendedor",
-    ITE.CODPROD AS "Cód. Produto",
-    PRO.DESCRPROD AS "Descrição",
-    ITE.CONTROLE AS "Controle",
-    PRO.MARCA AS "Marca",
-    ITE.QTDNEG AS "Qtd. Negociada",
-    ROUND (ITE.VLRUNIT, 2) AS "Vlr. Unitário",
-    ROUND (SUM (ITE.VLRTOT * TOP.GOLDEV), 2) AS "Vlr. Total Item",
-    SUM (CAB.VLRNOTA * TOP.GOLDEV) AS "Vlr. Nota"
-FROM
-    TGFCAB CAB,
-    VGFCAB VCA,
-    TGFEMP EMP,
-    TGFCGM CGM,
-    TGFPAR PAR,
-    TSICID CID,
-    TSIUFS UF,
-    TGFTOP TOP,
-    TGFITE ITE
-    LEFT JOIN (
-        SELECT
-            DIN.NUNOTA,
-            DIN.SEQUENCIA,
-            SUM (
-                CASE
-                    WHEN DIN.CODIMP = 6 THEN 1
-                    ELSE 0
-                END
-            ) AS PIS,
-            SUM (
-                CASE
-                    WHEN DIN.CODIMP = 7 THEN 1
-                    ELSE 0
-                END
-            ) AS COFINS,
-            SUM (
-                CASE
-                    WHEN DIN.CODIMP = 9 THEN 1
-                    ELSE 0
-                END
-            ) AS CSL,
-            SUM (
-                CASE
-                    WHEN DIN.CODIMP = 10 THEN 1
-                    ELSE 0
-                END
-            ) AS IRPJ,
-            SUM (
-                CASE
-                    WHEN DIN.CODIMP = 11 THEN 1
-                    ELSE 0
-                END
-            ) AS CPP,
-            SUM (
-                CASE
-                    WHEN DIN.CODIMP IN (
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9,
-                        10,
-                        11
-                    ) THEN DIN.VALOR
-                    ELSE 0
-                END
-            ) AS TOTIMP
-        FROM
-            TGFDIN DIN
-            INNER JOIN TGFCAB C ON (C.NUNOTA = DIN.NUNOTA)
-        WHERE
-            TRUNC (C.DTENTSAI) >= '01/01/2000'
-            AND TRUNC (C.DTENTSAI) <= '31/12/2100'
-            AND DIN.CODIMP IN (
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11
-            )
-        GROUP BY
-            DIN.NUNOTA,
-            DIN.SEQUENCIA
-    ) TDIN ON (
-        TDIN.NUNOTA = ITE.NUNOTA
-        AND TDIN.SEQUENCIA = ITE.SEQUENCIA
-    ),
-    TGFPRO PRO,
-    TGFVEN VEN,
-    TGFVEN GER
-WHERE
-    CAB.NUNOTA = ITE.NUNOTA
-    AND CAB.DTFATUR IS NULL
-    AND CAB.CODPARC = PAR.CODPARC
-    AND CAB.NUNOTA = VCA.NUNOTA
-    AND CAB.CODEMP = EMP.CODEMP
-    AND CAB.CODTIPOPER IN (34, 159, 234) -- Alteração: Filtrar por códigos 34, 159 e 234
-    AND CAB.DTNEG BETWEEN TO_DATE('01/09/2023', 'DD/MM/YYYY') AND TO_DATE('03/09/2023', 'DD/MM/YYYY') -- Alteração: Filtro pela data de negociação DTNEG
-    AND CAB.DHTIPOPER = TOP.DHALTER
-    AND ITE.CODPROD = PRO.CODPROD
-    AND PAR.CODCID = CID.CODCID
-    AND CID.UF = UF.CODUF
-    AND CAB.CODVEND = VEN.CODVEND
-    AND TOP.GOLSINAL = -1
-    AND VEN.CODGER = GER.CODVEND
-    AND CAB.CODEMP IN (1, 2, 3)
-    AND CGM.CODEMP = EMP.CODEMP
-    AND CGM.DTREF = (
-        SELECT
-            MAX (C.DTREF)
-        FROM
-            TGFCGM C
-        WHERE
-            C.CODEMP = EMP.CODEMP
-            AND C.DTREF <= CAB.DTNEG
-    )
-    AND (
-        (
-            GOLSINAL = -1
-            AND TOP.GOLDEV = -1
-            AND CAB.TIPMOV IN ('D') -- Alteração: Filtro pelo tipo de movimento 'D'
-            AND CAB.STATUSNOTA = 'L'
-        )
-        OR (
-            GOLSINAL = -1
-            AND TOP.GOLDEV = 1
-            AND CAB.TIPMOV IN ('V', 'D') -- Alteração: Filtro pelos tipos de movimento 'V' e 'D'
-            AND CAB.STATUSNOTA = 'L'
-        )
-        OR (
-            GOLSINAL = 1
-            AND TOP.GOLDEV = 1
-        )
-        OR (
-            GOLSINAL = 1
-            AND TOP.GOLDEV = -1
-        )
-    )
-
-GROUP BY
     CAB.CODEMP,
     CAB.NUNOTA,
     CAB.NUMNOTA,
+    CAB.ORDEMCARGA,
     CAB.DTNEG,
-    CAB.DTENTSAI,
-    CGM.DTREF,
-    CAB.CODPARC,
-    PAR.RAZAOSOCIAL,
-    CID.NOMECID,
-    UF.UF,
-    UF.DESCRICAO,
+    CAB.DTPREVENT,
+    CAB.CODTIPOPER,
+    TOP.DESCROPER,
     CAB.TIPMOV,
-    GER.CODVEND,
-    GER.APELIDO,
+    CAB.CODTIPVENDA,
+    TPV.DESCRTIPVENDA,
+    (
+        SELECT
+            OPC.OPCAO
+        FROM
+            TDDCAM CAM
+            JOIN TDDOPC OPC ON (OPC.NUCAMPO = CAM.NUCAMPO)
+        WHERE
+            (
+                CAM.NOMETAB = 'TGFCAB'
+                AND NOMECAMPO = 'AD_ENTREGACLIENTE'
+                AND OPC.VALOR = CAB.AD_ENTREGACLIENTE
+            )
+    ) AS ENTREGACLIENTE,
+    PAR.AD_CODPROJ,
+    PRJ.IDENTIFICACAO,
     CAB.CODVEND,
     VEN.APELIDO,
+    (
+        SELECT
+            CID.NOMECID
+        FROM
+            TSICID CID
+        WHERE
+            CID.CODCID = PAR.CODCID
+    ) AS CIDADE,
+    (
+        SELECT
+            UFS.UF
+        FROM
+            TSICID CID
+            LEFT JOIN TSIUFS UFS ON CID.UF = UFS.CODUF
+        WHERE
+            CID.CODCID = PAR.CODCID
+    ) AS UF,
+    CAB.CODPARC,
+    PAR.RAZAOSOCIAL,
+    TPP.DESCRTIPPARC,
+    (
+        SELECT
+            OPC.OPCAO
+        FROM
+            TDDCAM CAM
+            JOIN TDDOPC OPC ON (OPC.NUCAMPO = CAM.NUCAMPO)
+        WHERE
+            (
+                CAM.NOMETAB = 'TGFCAB'
+                AND NOMECAMPO = 'AD_STATUSAGUARD'
+                AND OPC.VALOR = CAB.AD_STATUSAGUARD
+            )
+    ) AS "STATUS AGUARDANDO",
+    ITE.SEQUENCIA,
+    ITE.PENDENTE,
     ITE.CODPROD,
     PRO.DESCRPROD,
+    PRO.MARCA,
     ITE.CONTROLE,
     ITE.QTDNEG,
-    CAB.VLRNOTA,
-    TOP.GOLDEV,
-    PRO.MARCA,
     ITE.VLRUNIT,
-    ITE.VLRTOT
+    CASE
+        WHEN CAB.TIPMOV = 'D' THEN (ITE.VLRTOT * -1)
+        ELSE ITE.VLRTOT
+    END AS VLRTOT,
+    ITE.VLRICMS,
+    ITE.ALIQICMS,
+    ITE.CODCFO,
+    ITE.CODTRIB,
+    NVL(
+        (
+            SELECT
+                SUM(EST.ESTOQUE)
+            FROM
+                TGFEST EST
+            WHERE
+                EST.CODEMP = CAB.CODEMP
+                AND EST.CODPROD = ITE.CODPROD
+                AND EST.CONTROLE = ITE.CONTROLE
+                AND EST.CODLOCAL NOT IN (6010, 7010, 8010, 9010)
+        ),
+        0
+    ) AS ESTOQUE,
+    UPPER(TIM_MONTHEXT(CAB.DTENTSAI)) AS "MÊS",
+    PAN_ANO(CAB.DTENTSAI) AS ANO,
+    ITE.CODLOCALORIG,
+    NVL(
+        (
+            SELECT
+                SUM(ESTOQUE)
+            FROM
+                TGFEST EST
+            WHERE
+                EST.CODEMP = CAB.CODEMP
+                AND EST.CODPROD = ITE.CODPROD
+                AND EST.CODLOCAL = ITE.CODLOCALORIG
+        ),
+        0
+    ) AS ESTOQUE_LOCAL,
+    CASE
+        WHEN CAB.CODTIPOPER IN (35, 235) THEN (
+            SELECT
+                OPC.OPCAO
+            FROM
+                TDDCAM CAM
+                JOIN TDDOPC OPC ON (OPC.NUCAMPO = CAM.NUCAMPO)
+            WHERE
+                (
+                    CAM.NOMETAB = 'TGFCAB'
+                    AND NOMECAMPO = 'CIF_FOB'
+                )
+                AND OPC.VALOR = CAB.CIF_FOB
+        )
+        ELSE NULL
+    END CIF_FOB,
+    (
+        CASE
+            WHEN CAB.CODTIPOPER IN (35, 235) THEN (
+                SELECT
+                    C.CODPARCTRANSP
+                FROM
+                    TGFCAB C,
+                    TGFPAR P
+                WHERE
+                    P.CODPARC = C.CODPARC
+                    AND CAB.NUNOTA = C.NUNOTA
+            )
+            ELSE NULL
+        END
+    ) || ' - ' || (
+        CASE
+            WHEN CAB.CODTIPOPER IN (35, 235) THEN (
+                SELECT
+                    P.RAZAOSOCIAL
+                FROM
+                    TGFCAB C,
+                    TGFPAR P
+                WHERE
+                    P.CODPARC = C.CODPARCTRANSP
+                    AND CAB.NUNOTA = C.NUNOTA
+            )
+            ELSE NULL
+        END
+    ) TRANSPORTADORA
+FROM
+    TGFCAB CAB,
+    TGFPAR PAR
+    LEFT JOIN TGFTPP TPP ON TPP.CODTIPPARC = PAR.CODTIPPARC,
+    TGFVEN VEN,
+    TGFITE ITE,
+    TGFPRO PRO,
+    TGFTOP TOP,
+    TGFTPV TPV,
+    TCSPRJ PRJ
+WHERE
+    CAB.CODPARC = PAR.CODPARC
+    AND CAB.CODVEND = VEN.CODVEND
+    AND CAB.NUNOTA = ITE.NUNOTA
+    AND ITE.CODPROD = PRO.CODPROD
+    AND PAR.AD_CODPROJ = PRJ.CODPROJ
+    AND CAB.CODTIPOPER IN (35, 36, 164, 146, 48, 153, 235, 7, 21, 36, 78)
+    AND CAB.CODTIPOPER = TOP.CODTIPOPER
+    AND CAB.DHTIPOPER = TOP.DHALTER
+    AND CAB.CODTIPVENDA = TPV.CODTIPVENDA
+    AND CAB.DHTIPVENDA = TPV.DHALTER
+    AND CAB.CODEMP IN (1,3 )
+    AND TRUNC(CAB.DTNEG) BETWEEN '25/set/2023' AND '26/set/2023'
 ORDER BY
-    CAB.DTENTSAI
+    CAB.CODEMP,
+    CAB.NUNOTA,
+    ITE.SEQUENCIA
