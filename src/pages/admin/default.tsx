@@ -116,7 +116,7 @@ export default function UserReports() {
         }, {
             type: 'iframe',
             duration: 2 * 60 * 1000, // Duração em milissegundos (1 minuto)
-            content: (<iframe width="1280" height="720" src="https://www.powtoon.com/embed/bUfhi7eQRWd/" frameborder="0" allowfullscreen></iframe>)
+            content: (<iframe width="1280" height="720" src="https://www.powtoon.com/embed/bUfhi7eQRWd/" ></iframe>)
         }, {
             type: 'gif',
             duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
