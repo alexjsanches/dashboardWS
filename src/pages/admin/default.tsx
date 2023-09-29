@@ -114,15 +114,9 @@ export default function UserReports() {
                 </div>
             )
         }, {
-            type: 'gif',
-            duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
-            content: (<img
-                src="/img/resultado.gif"
-                alt="GIF"
-                style={{
-                width: '100%',
-                height: 'auto'
-            }}/>)
+            type: 'iframe',
+            duration: 2 * 60 * 1000, // Duração em milissegundos (1 minuto)
+            content: (<iframe width="1280" height="720" src="https://www.powtoon.com/embed/bUfhi7eQRWd/" frameborder="0" allowfullscreen></iframe>)
         }, {
             type: 'gif',
             duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
