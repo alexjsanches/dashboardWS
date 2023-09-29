@@ -37,7 +37,7 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
     fetchData();
 
-    const intervalId = setInterval(fetchData, 10000);
+    const intervalId = setInterval(fetchData, 180000);
 
     return () => {
       clearInterval(intervalId);

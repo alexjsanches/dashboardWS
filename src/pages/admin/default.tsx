@@ -76,7 +76,7 @@ export default function UserReports() {
         }
     
         fetchDataHj();
-        const intervalId = setInterval(fetchDataHj, 10000);
+        const intervalId = setInterval(fetchDataHj, 180000);
 
         return () => {
           clearInterval(intervalId);
