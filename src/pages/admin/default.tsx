@@ -28,6 +28,7 @@ export default function UserReports() {
     const metaDiariaCalcGYN = gynSFormat !== 0 ? (metaGyn - gynSFormat) / diasFaltantes : 0;
 
 
+
     useEffect(() => {
       async function fetchData() {
         try {
@@ -82,7 +83,14 @@ export default function UserReports() {
           clearInterval(intervalId);
         };
       }, []);
-  
+      const handleVideoEnded = () => {
+        const nextScreenIndex =
+          currentScreenIndex === screens.length - 1
+            ? 0
+            : currentScreenIndex + 1;
+        setCurrentScreenIndex(nextScreenIndex);
+      };
+      
 
 
     const screens = [
@@ -114,10 +122,16 @@ export default function UserReports() {
                 </div>
             )
         }, {
-            type: 'iframe',
-            duration: 2 * 60 * 1000, // Duração em milissegundos (1 minuto)
-            content: (<iframe width="1280" height="720" src="https://www.powtoon.com/embed/bUfhi7eQRWd/" ></iframe>)
-        }, {
+          type: 'video', // Altere o tipo para 'video'
+          duration: 41 * 1000, // Duração em milissegundos (2 minutos)
+          content: (
+            <video width="1280" height="720" autoPlay controls>
+              <source src="/img/video.mp4" type="video/mp4" />
+              Seu navegador não suporta a reprodução de vídeo.
+            </video>
+          )
+        }
+        , {
             type: 'gif',
             duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
             content: (<img
