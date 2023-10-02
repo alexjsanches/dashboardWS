@@ -24,7 +24,7 @@ export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiari
   <Spacer />
  <Box p='2'>
   <Badge ml='45px' fontSize='0.8em' colorScheme='yellow'>
-          Ultimo dia!
+          Faltam {diasFaltantes} dias
         </Badge>
         </Box>
 </Flex>

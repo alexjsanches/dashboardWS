@@ -4,7 +4,6 @@ import Card from 'components/card/Card';
 import { VSeparator } from 'components/separator/Separator';
 import { RiArrowUpSFill } from 'react-icons/ri';
 import { fetchAndFormatData, getToken } from 'api/requests/Fatur_diarioGeral'; 
-import { Grafico } from './Grafico';
 import StatusIndicator from './StatusIndicator';
 
 
@@ -120,11 +119,6 @@ export default function DailyTraffic({ ...rest }) {
         </Flex>
       </Flex>
       <Box h='240px' mt='25px'>
-      {isLoadingData ? (
-              <SkeletonCircle size='40'/>
-            ) : (
-        <Grafico />
-            )}
         <Card
           bg={cardColor}
           flexDirection='row'
