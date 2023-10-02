@@ -27,7 +27,7 @@ export default function UserReports() {
     udiSFormat !== 0 ? (metaUdi - udiSFormat) / diasFaltantes : 0;
   const metaDiariaCalcGYN =
     gynSFormat !== 0 ? (metaGyn - gynSFormat) / diasFaltantes : 0;
-  const [videoDuration, setVideoDuration] = useState(0);
+ 
 
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
 
@@ -92,31 +92,12 @@ export default function UserReports() {
     setCurrentScreenIndex(nextScreenIndex);
   };
 
-  useEffect(() => {
-    // Função para obter a duração do vídeo
-    const handleVideoLoadedMetadata = (event: Event) => {
-      const videoElement = event.target as HTMLVideoElement; // Converter para HTMLVideoElement
-      setVideoDuration(Math.floor(videoElement.duration * 1000)); // Converte para milissegundos
-    };
-
-    // Adicione um ouvinte de evento quando o componente montar
-    const videoElement = document.getElementById('videoElement'); // Certifique-se de que o elemento de vídeo tem o ID correspondente
-    if (videoElement) {
-      videoElement.addEventListener('loadedmetadata', handleVideoLoadedMetadata);
-    }
-
-    // Limpe o ouvinte de evento quando o componente for desmontado
-    return () => {
-      if (videoElement) {
-        videoElement.removeEventListener('loadedmetadata', handleVideoLoadedMetadata);
-      }
-    };
-  }, []);
+  
 
   const screens = [
     {
       type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
-      duration: 3 * 60 * 1000, // Duração em milissegundos (3 minutos)
+      duration: 2 * 60 * 1000, // Duração em milissegundos (3 minutos)
       content: (
         <div>
           <Grid
@@ -163,10 +144,10 @@ export default function UserReports() {
     },
     {
       type: 'video', // Altere o tipo para 'video'
-      duration: videoDuration, // Duração em milissegundos (dinâmica)
+      duration: 30* 1000, // Duração em milissegundos (dinâmica)
       content: (
         <video width='1280' height='720' autoPlay controls onEnded={handleVideoEnded}>
-          <source src='/img/video.mp4' type='video/mp4' />
+          <source src='/img/video_s.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
       ),
@@ -187,7 +168,6 @@ export default function UserReports() {
     },
     // Adicione mais telas aqui da mesma forma
   ];
-
   useEffect(() => {
     const nextScreenIndex =
       currentScreenIndex === screens.length - 1 ? 0 : currentScreenIndex + 1;
