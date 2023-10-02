@@ -166,6 +166,16 @@ export default function UserReports() {
         />
       ),
     },
+    {
+      type: 'video', // Altere o tipo para 'video'
+      duration: 17* 1000, // Duração em milissegundos (dinâmica)
+      content: (
+        <video width='1280' height='720' autoPlay controls onEnded={handleVideoEnded}>
+          <source src='/img/video_a.mp4' type='video/mp4' />
+          Seu navegador não suporta a reprodução de vídeo.
+        </video>
+      ),
+    },
     // Adicione mais telas aqui da mesma forma
   ];
   useEffect(() => {
