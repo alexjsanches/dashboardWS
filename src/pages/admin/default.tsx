@@ -16,10 +16,11 @@ export default function UserReports() {
   const [gynSFormat, setGynSFormat] = useState<number | null>(null);
   const [udiSFormatHj, setUdiSFormatHj] = useState<number | null>(null);
   const [gynSFormatHj, setGynSFormatHj] = useState<number | null>(null);
-  const metaUdi = 3129282.73;
-  const metaGyn = 3824678.76;
+  const metaUdi =  3727807.22;
+  const metaGyn = 3879962.61 
+  ;
   const diasUteisNoMes = 21;
-  const diasConcluidos = 2;
+  const diasConcluidos = 3;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const tendenciaUDI = (udiSFormat / diasConcluidos) * diasUteisNoMes;
   const tendenciaGYN = (gynSFormat / diasConcluidos) * diasUteisNoMes;
