@@ -4,7 +4,7 @@ import {
     Badge,
     Flex,
     Text,
-    Skeleton
+    Skeleton, useColorModeValue
 } from '@chakra-ui/react';
 import Card from 'components/card/Card';
 import {MetaUdi} from 'views/admin/default/components/MetaUdi_dia';
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function Bloco3({udiSFormatHj, isLoadingData, gynSFormatHj, metaDiariaCalcUDI, metaDiariaCalcGYN} : Props) {
-
+    const textColor = useColorModeValue('green.500', 'green.300');
     // @ts-ignore
     return (
 
@@ -48,7 +48,7 @@ export default function Bloco3({udiSFormatHj, isLoadingData, gynSFormatHj, metaD
                     {isLoadingData
                         ? (<Skeleton height="20px" width="250px"/>)
                         : (
-                            <Text color='green.500' fontSize='35px' fontWeight='700' lineHeight='100%'>
+                            <Text color={textColor} fontSize='35px' fontWeight='700' lineHeight='100%'>
                                 {udiSFormatHj !== null && udiSFormatHj !== undefined
                                     ? udiSFormatHj.toLocaleString('pt-BR', {
                                         style: 'currency',
@@ -95,7 +95,7 @@ export default function Bloco3({udiSFormatHj, isLoadingData, gynSFormatHj, metaD
                     {isLoadingData
                         ? (<Skeleton height="20px" width="250px"/>)
                         : (
-                            <Text color='green.500' fontSize='35px' fontWeight='700' lineHeight='100%'>
+                            <Text color={textColor} fontSize='35px' fontWeight='700' lineHeight='100%'>
                                 {gynSFormatHj !== null && gynSFormatHj !== undefined
                                     ? gynSFormatHj.toLocaleString('pt-BR', {
                                         style: 'currency',

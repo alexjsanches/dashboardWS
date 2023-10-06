@@ -9,6 +9,8 @@ import 'styles/Fade.module.css';
 import Bloco3 from 'views/admin/profile/components/bloco3';
 import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw';
 import { fetchAndFormatDataHj, getTokenHj } from 'api/requests/Und_FaturDiario';
+import AdminNavbarLinks from 'components/navbar/NavbarLinksAdmin'
+
 
 export default function UserReports() {
   const [isLoadingData, setIsLoadingData] = useState(true);
@@ -16,10 +18,10 @@ export default function UserReports() {
   const [gynSFormat, setGynSFormat] = useState<number | null>(null);
   const [udiSFormatHj, setUdiSFormatHj] = useState<number | null>(null);
   const [gynSFormatHj, setGynSFormatHj] = useState<number | null>(null);
-  const metaUdi = 3129282.73;
-  const metaGyn = 3824678.76;
+  const metaUdi = 3727807.22;
+  const metaGyn = 3879962.61;
   const diasUteisNoMes = 21;
-  const diasConcluidos = 2;
+  const diasConcluidos = 5;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const tendenciaUDI = (udiSFormat / diasConcluidos) * diasUteisNoMes;
   const tendenciaGYN = (gynSFormat / diasConcluidos) * diasUteisNoMes;
@@ -139,6 +141,7 @@ export default function UserReports() {
               metaDiariaCalcGYN={metaDiariaCalcGYN}
             />
           </Box>
+        
         </div>
       ),
     },
@@ -194,6 +197,7 @@ export default function UserReports() {
         </Box>
       </Box>
       <CustomToastWithConfetti />
+      <AdminNavbarLinks secondary={false} />
     </AdminLayout>
   );
 }

@@ -1,4 +1,4 @@
-import { Box, Spacer, Badge, Flex, Text, Skeleton } from '@chakra-ui/react';
+import { Box, Spacer, Badge, Flex, Text, Skeleton, useColorModeValue } from '@chakra-ui/react';
 import Card from 'components/card/Card';
 
 interface Props {
@@ -10,6 +10,9 @@ interface Props {
 }
 
 export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiariaCalcUDI, tendenciaUDI}: Props) {
+
+  const textColor = useColorModeValue('secondaryGray.900', 'white');
+  const textcolorRed = useColorModeValue('red.500', 'red.400'); 
   
   return (
     <div>
@@ -43,7 +46,7 @@ export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiari
       {isLoadingData ? (
               <Skeleton height="20px" width="250px" />
             ) : (
-            <Text color='gray.700' fontSize='35px' fontWeight='700' lineHeight='100%'>
+            <Text color={textColor} fontSize='35px' fontWeight='700' lineHeight='100%'>
             {metaUdi.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} 
 
             </Text>
@@ -82,7 +85,7 @@ export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiari
       {isLoadingData ? (
               <Skeleton height="20px" width="250px" />
             ) : (
-            <Text color='gray.700' fontSize='35px' fontWeight='700' lineHeight='100%'>
+            <Text color={textColor} fontSize='35px' fontWeight='700' lineHeight='100%'>
             {metaDiariaCalcUDI.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} 
             </Text>
             )}
@@ -120,7 +123,7 @@ export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiari
       {isLoadingData ? (
               <Skeleton height="20px" width="250px" />
             ) : (
-            <Text color='red.500' fontSize='35px' fontWeight='700' lineHeight='100%'>
+            <Text color={textcolorRed} fontSize='35px' fontWeight='700' lineHeight='100%'>
             {tendenciaUDI.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}   
             </Text>
             )}

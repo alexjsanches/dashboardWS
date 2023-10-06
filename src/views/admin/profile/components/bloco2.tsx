@@ -1,4 +1,4 @@
-import { Box, Spacer, Badge, Flex, Text, Skeleton } from '@chakra-ui/react';
+import { Box, Spacer, Badge, Flex, Text, Skeleton, useColorModeValue } from '@chakra-ui/react';
 import Card from 'components/card/Card';
 interface Props {
   diasFaltantes: number;
@@ -9,6 +9,9 @@ interface Props {
 }
 
 export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiariaCalcGYN, tendenciaGYN}: Props) {
+
+  const textColor = useColorModeValue('secondaryGray.900', 'white');
+  const textcolorRed = useColorModeValue('red.500', 'red.400'); 
 
  
   return (
@@ -43,7 +46,7 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
       {isLoadingData ? (
               <Skeleton height="20px" width="250px" />
             ) : (
-            <Text color='gray.700' fontSize='35px' fontWeight='700' lineHeight='100%'>
+            <Text color={textColor} fontSize='35px' fontWeight='700' lineHeight='100%'>
             {metaGyn.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} 
             </Text>
             )}
@@ -81,7 +84,7 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
             {isLoadingData ? (
               <Skeleton height="20px" width="250px" />
             ) : (
-              <Text color='gray.700' fontSize='35px' fontWeight='700' lineHeight='100%'>
+              <Text color={textColor} fontSize='35px' fontWeight='700' lineHeight='100%'>
                 {metaDiariaCalcGYN.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </Text>
             )}
@@ -119,7 +122,7 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
       {isLoadingData ? (
               <Skeleton height="20px" width="250px" />
             ) : (
-            <Text color='red.500' fontSize='35px' fontWeight='700' lineHeight='100%'>
+            <Text color={textcolorRed} fontSize='35px' fontWeight='700' lineHeight='100%'>
             {tendenciaGYN.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}   
             </Text>
             )}
