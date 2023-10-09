@@ -93,7 +93,7 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
         </Flex>
       
       </Card>
-      <Card mt='15px' alignItems='left'flexDirection='column' w='100%'>
+      <Card mt='15px' alignItems='left'flexDirection='column' w='100%' hidden>
       <Flex>
         <Box p='2' >
   <Text color='secondaryGray.600' fontSize='lg' fontWeight='500'>

@@ -23,8 +23,8 @@ export default function UserReports() {
   const diasUteisNoMes = 20;
   const diasConcluidos = 5;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
-  const tendenciaUDI = 0;
-  const tendenciaGYN = 0;
+  const tendenciaUDI = ((udiSFormat) / diasConcluidos) * diasUteisNoMes;
+  const tendenciaGYN = ((gynSFormat) / diasConcluidos) * diasUteisNoMes;
   const metaDiariaCalcUDI =
     udiSFormat !== 0 ? (metaUdi - udiSFormat) / diasFaltantes : 0;
   const metaDiariaCalcGYN =

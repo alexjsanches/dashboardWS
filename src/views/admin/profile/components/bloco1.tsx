@@ -94,7 +94,7 @@ export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiari
         </Flex>
       
       </Card>
-      <Card mt='15px' alignItems='left'flexDirection='column' w='100%'>
+      <Card mt='15px' alignItems='left'flexDirection='column' w='100%' hidden>
       <Flex>
         <Box p='2' >
   <Text color='secondaryGray.600' fontSize='lg' fontWeight='500'>
