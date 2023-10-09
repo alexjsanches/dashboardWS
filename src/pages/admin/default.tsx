@@ -147,7 +147,7 @@ export default function UserReports() {
     },
     {
       type: 'video', // Altere o tipo para 'video'
-      duration: 43* 1000, // Duração em milissegundos (dinâmica)
+      duration: 30* 1000, // Duração em milissegundos (dinâmica)
       content: (
         <video width='1280' height='720' autoPlay controls onEnded={handleVideoEnded}>
           <source src='/img/video_h.mp4' type='video/mp4' />
