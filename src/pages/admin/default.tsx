@@ -20,11 +20,11 @@ export default function UserReports() {
   const [gynSFormatHj, setGynSFormatHj] = useState<number | null>(null);
   const metaUdi = 3727807.22; 
   const metaGyn = 3879962.61;
-  const diasUteisNoMes = 21;
-  const diasConcluidos = 5;
+  const diasUteisNoMes = 20;
+  const diasConcluidos = 4;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
-  const tendenciaUDI = (udiSFormat / diasConcluidos) * diasUteisNoMes;
-  const tendenciaGYN = (gynSFormat / diasConcluidos) * diasUteisNoMes;
+  const tendenciaUDI = ((udiSFormat + udiSFormatHj) / diasConcluidos) * diasUteisNoMes;
+  const tendenciaGYN = ((gynSFormat + gynSFormatHj) / diasConcluidos) * diasUteisNoMes;
   const metaDiariaCalcUDI =
     udiSFormat !== 0 ? (metaUdi - udiSFormat) / diasFaltantes : 0;
   const metaDiariaCalcGYN =
