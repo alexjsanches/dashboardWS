@@ -21,13 +21,13 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
       <Flex>
         <Box p='2' >
   <Text color='secondaryGray.600' fontSize='lg' fontWeight='500'>
-            GYN - Meta Global
+            Meta Global
           </Text>
           </Box>
   <Spacer />
  <Box p='2'>
   <Badge ml='45px' fontSize='0.8em' colorScheme='yellow'>
-  Faltam {diasFaltantes} dias
+  GYN
         </Badge>
         </Box>
 </Flex>
@@ -59,13 +59,13 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
       <Flex>
         <Box p='2' >
   <Text color='secondaryGray.600' fontSize='lg' fontWeight='500'>
-            GYN - Meta do dia
+            Meta do dia
           </Text>
           </Box>
   <Spacer />
  <Box p='2'>
   <Badge ml='45px' fontSize='0.8em' colorScheme='blue'>
-          % maior
+          GYN
         </Badge>
         </Box>
 </Flex>

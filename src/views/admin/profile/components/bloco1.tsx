@@ -7,6 +7,7 @@ interface Props {
   metaUdi: number;
   metaDiariaCalcUDI: number;
   tendenciaUDI: number;
+
 }
 
 export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiariaCalcUDI, tendenciaUDI}: Props) {
@@ -21,13 +22,13 @@ export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiari
       <Flex>
         <Box p='2' >
   <Text color='secondaryGray.600' fontSize='lg' fontWeight='500'>
-            UDI - Meta Global
+            Meta Global
           </Text>
           </Box>
   <Spacer />
  <Box p='2'>
   <Badge ml='45px' fontSize='0.8em' colorScheme='yellow'>
-          Faltam {diasFaltantes} dias
+          UDI
         </Badge>
         </Box>
 </Flex>
@@ -60,13 +61,13 @@ export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiari
       <Flex>
         <Box p='2' >
   <Text color='secondaryGray.600' fontSize='lg' fontWeight='500'>
-            UDI - Meta do dia
+            Meta do dia
           </Text>
           </Box>
   <Spacer />
  <Box p='2'>
   <Badge ml='45px' fontSize='0.8em' colorScheme='blue'>
-          % maior
+          UDI
         </Badge>
         </Box>
 </Flex>

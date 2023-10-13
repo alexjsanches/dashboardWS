@@ -2,17 +2,18 @@ import dynamic from 'next/dynamic';
 import Card from 'components/card/Card';
 import { useState, useEffect } from 'react';
 import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw';
+import { Box, Flex } from '@chakra-ui/react';
 
-export function Grafico() {
+interface Props {
+  metaUdi: number;
+  metaGyn: number;
+}
 
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
-
+export function Grafico({ metaUdi, metaGyn }: Props) {
+  const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
   const [udiSFormat, setUdiSFormat] = useState<number | null>(null);
   const [gynSFormat, setGynSFormat] = useState<number | null>(null);
-  const metaUdi = 3129282.73;
-  const metaGyn = 3824678.76; 
-  
 
   useEffect(() => {
     async function fetchData() {
@@ -36,80 +37,143 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
     }
 
     fetchData();
-
-    const intervalId = setInterval(fetchData, 180000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
   }, []);
 
-const data = {
-  series: [
-    {
-      name: 'Previsto UDI',
-      data: [metaUdi],
-      color: '#775DD0',
-    },
-    {
-      name: 'Realizado UDI',
-      data: [udiSFormat],
-      color: '#00E396',
-    }, 
-    {
-      name: 'Previsto GYN',
-      data: [ metaGyn],
-      color: '#775DD0',
-    },
-    {
-      name: 'Realizado GYN',
-      data: [gynSFormat],
-      color: '#00E396'
-    }, 
-    
-],
-  options: {
-    chart: {
-      height: 400,
-      toolbar: {
+  const dataUdi = {
+    series: [
+      {
+        name: 'Atual',
+        data: [
+          {
+            x: 'UDI',
+            y: udiSFormat,
+            goals: [
+              {
+                name: 'Meta',
+                value: metaUdi,
+                strokeHeight: 5,
+                strokeColor: '#775DD0',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    options: {
+      grid: {
         show: false,
-      }
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        dataLabels: {
-          position: 'top',
+      },
+      chart: {
+        height: 250,
+        toolbar: {
+          show: false,
         },
-      }
+        dropShadow: {
+          enabled: true,
+          top: 13,
+          left: 0,
+          blur: 10,
+          opacity: 0.1,
+          color: "#4318FF",
+        },
+      },
+      tooltip: {
+        theme: "dark",
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: '40%',
+        },
+      },
+      colors: ['#00E396'],
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        show: true,
+        showForSingleSeries: true,
+        customLegendItems: ['Atual', 'Meta'],
+        markers: {
+          fillColors: ['#00E396', '#775DD0'],
+        },
+      },
+      yaxis: {
+        show: false,
+      },
     },
-    dataLabels: {
-      enabled: false,
-      offsetX: -6,
-      style: {
-        fontSize: '18px',
-        colors: ['#fff']
-      }
-    },
-    stroke: {
-      show: true,
-      width: 1,
-      colors: ['#fff']
-    },
-    yaxis: {
-      show: false,
-    },
-  },
-};
+  };
 
+  const dataGyn = {
+    series: [
+      {
+        name: 'Atual',
+        data: [
+          {
+            x: 'GYN',
+            y: gynSFormat,
+            goals: [
+              {
+                name: 'Meta',
+                value: metaGyn,
+                strokeHeight: 5,
+                strokeColor: '#775DD0',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    options: {
+      grid: {
+        show: false,
+      },
+      chart: {
+        height: 250,
+        toolbar: {
+          show: false,
+        },
+        dropShadow: {
+          enabled: true,
+          top: 13,
+          left: 0,
+          blur: 10,
+          opacity: 0.1,
+          color: "#4318FF",
+        },
+        
+      },
+      tooltip: {
+        theme: "dark",
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: '40%',
+        },
+      },
+      colors: ['#00E396'],
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        show: true,
+        showForSingleSeries: true,
+        customLegendItems: ['Atual', 'Meta'],
+        markers: {
+          fillColors: ['#00E396', '#775DD0'],
+        },
+      },
+      yaxis: {
+        show: false,
+      },
+    },
+  };
 
   return (
-    
-      <Chart
-        options={data.options}
-        series={data.series}
-        type='bar'
-      />
-    
-  )
+    <Box>
+      <Flex>
+      <Chart options={dataUdi.options} series={dataUdi.series} type="bar"  width='160px' height='220px'/>
+      <Chart options={dataGyn.options} series={dataGyn.series} type="bar"  width='160px' height='220px'/>
+      </Flex>
+    </Box>
+  );
 }

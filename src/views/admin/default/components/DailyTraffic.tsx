@@ -5,20 +5,23 @@ import { VSeparator } from 'components/separator/Separator';
 import { RiArrowUpSFill } from 'react-icons/ri';
 import { fetchAndFormatData, getToken } from 'api/requests/Fatur_diarioGeral'; 
 import StatusIndicator from './StatusIndicator';
+import { Grafico } from './Grafico';
+
+interface Props {
+  percentualdiaUdi: number;
+  percentualdiaGyn: number;
+  metaUdi: number;
+  metaGyn: number;
+  diasFaltantes: number;
+}
 
 
-
-
-export default function DailyTraffic({ ...rest }) {
+export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentualdiaGyn, metaUdi, metaGyn, ... rest }:Props) {
   
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [formattedValue1, setFormattedValue1] = useState<string | null>('Carregando...');
   const [formattedValue2, setFormattedValue2] = useState<string | null>('Carregando...');
-  const [percentageValue1, setPercentageValue1] = useState<number | null>(50);
-  const [percentageValue2, setPercentageValue2] = useState<number | null>(50);
   const textColor = useColorModeValue('secondaryGray.900', 'white');
-  const cardColor = useColorModeValue('white', 'navy.700');
-  const cardShadow = useColorModeValue('0px 18px 40px rgba(112, 144, 176, 0.12)', 'unset');
 
 
 
@@ -29,12 +32,10 @@ export default function DailyTraffic({ ...rest }) {
         if (token !== null) {
           const response = await fetchAndFormatData(token);
           if (response !== null) {
-            const { formattedValue1, formattedValue2, percentValue1, percentValue2 } = response;
+            const { formattedValue1, formattedValue2, } = response;
 
-            setFormattedValue1(formattedValue1);
+            setFormattedValue1(formattedValue1);  
             setFormattedValue2(formattedValue2);
-            setPercentageValue1(percentValue1);
-            setPercentageValue2(percentValue2);
             setIsLoadingData(false);
           } else {
             console.error('Erro ao formatar os dados.');
@@ -48,8 +49,6 @@ export default function DailyTraffic({ ...rest }) {
 
     }
 
-
-
     fetchData();
 
     
@@ -62,7 +61,7 @@ export default function DailyTraffic({ ...rest }) {
         Por Unidade
       </Text>
       <Badge ml='10' fontSize='0.8em' colorScheme='purple'>
-          Dados ao vivo
+          Faltam {diasFaltantes} dias
         </Badge>
         <StatusIndicator />
       </Flex>
@@ -87,7 +86,7 @@ export default function DailyTraffic({ ...rest }) {
               <Skeleton height="20px" width="50px" />
             ) : (
           <Text color='green.500' fontSize='sm' fontWeight='700'>
-            {percentageValue1 !== null ? `${percentageValue1.toFixed(2)}%` : 'Carregando...'}
+            {percentualdiaUdi !== null ? `${percentualdiaUdi.toFixed(2)} % da meta` : 'Carregando...'}
           </Text>
             )}
         </Flex>
@@ -113,52 +112,14 @@ export default function DailyTraffic({ ...rest }) {
               <Skeleton height="20px" width="50px" />
             ) : (
           <Text color='green.500' fontSize='sm' fontWeight='700'>
-            {percentageValue2 !== null ? `${percentageValue2.toFixed(2)}%` : 'Carregando...'}
+            {percentualdiaGyn !== null ? `${percentualdiaGyn.toFixed(2)} % da meta` : 'Carregando...'}
           </Text>
             )}
         </Flex>
       </Flex>
       <Box h='240px' mt='25px'>
-        <Card
-          bg={cardColor}
-          flexDirection='row'
-          boxShadow={cardShadow}
-          w='100%'
-          p='15px'
-          px='20px'
-          mx='auto'>
-          <Flex direction='column' py='5px'>
-            <Flex align='center'>
-              <Box h='8px' w='8px' bg='brand.500' borderRadius='50%' me='4px' />
-              <Text fontSize='xs' color='secondaryGray.600' fontWeight='700' mb='5px'>
-                Uberlândia
-              </Text>
-            </Flex>
-            {isLoadingData ? (
-              <Skeleton height="20px" width="50px" />
-            ) : (
-            <Text fontSize='lg' color={textColor} fontWeight='700'>
-              {percentageValue1 !== null ? `${percentageValue1.toFixed(2)}%` : 'Carregando...'}
-            </Text>
-            )}
-          </Flex>
-          <VSeparator mx={{ base: '60px', xl: '60px', '2xl': '60px' }} />
-          <Flex direction='column' py='5px' me='10px'>
-            <Flex align='center'>
-              <Box h='8px' w='8px' bg='#6AD2FF' borderRadius='50%' me='4px' />
-              <Text fontSize='xs' color='secondaryGray.600' fontWeight='700' mb='5px'>
-                Goiânia
-              </Text>
-            </Flex>
-            {isLoadingData ? (
-              <Skeleton height="20px" width="50px" />
-            ) : (
-            <Text fontSize='lg' color={textColor} fontWeight='700'>
-              {percentageValue2 !== null ? `${percentageValue2.toFixed(2)}%` : 'Carregando...'}
-            </Text>
-            )}
-          </Flex>
-        </Card>
+        <Grafico metaUdi = {metaUdi}
+            metaGyn = {metaGyn} />
       </Box>
     </Card>
   );
