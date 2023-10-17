@@ -93,7 +93,7 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
         </Flex>
       
       </Card>
-      <Card mt='15px' alignItems='left'flexDirection='column' w='100%' hidden>
+      <Card mt='15px' alignItems='left'flexDirection='column' w='100%' >
       <Flex>
         <Box p='2' >
   <Text color='secondaryGray.600' fontSize='lg' fontWeight='500'>
@@ -102,7 +102,7 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
           </Box>
   <Spacer />
  <Box p='2'>
-  <Badge fontSize='0.8em' colorScheme='red'>
+  <Badge fontSize='0.8em' colorScheme='red' hidden>
           Abaixo da Meta
         </Badge>
         </Box>
