@@ -86,7 +86,7 @@ export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentu
               <Skeleton height="20px" width="50px" />
             ) : (
           <Text color='green.500' fontSize='sm' fontWeight='700'>
-            {percentualdiaUdi !== null ? `${percentualdiaUdi.toFixed(2)} % da meta` : 'Carregando...'}
+            {percentualdiaUdi !== null ? `${percentualdiaUdi.toFixed(2)} %` : 'Carregando...'}
           </Text>
             )}
         </Flex>
@@ -112,7 +112,7 @@ export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentu
               <Skeleton height="20px" width="50px" />
             ) : (
           <Text color='green.500' fontSize='sm' fontWeight='700'>
-            {percentualdiaGyn !== null ? `${percentualdiaGyn.toFixed(2)} % da meta` : 'Carregando...'}
+            {percentualdiaGyn !== null ? `${percentualdiaGyn.toFixed(2)} %` : 'Carregando...'}
           </Text>
             )}
         </Flex>

@@ -12,6 +12,7 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
 
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const textcolorRed = useColorModeValue('red.500', 'red.400'); 
+  const atingimentoGYN = (tendenciaGYN/metaGyn)*100;
 
  
   return (
@@ -102,8 +103,8 @@ export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiar
           </Box>
   <Spacer />
  <Box p='2'>
-  <Badge fontSize='0.8em' colorScheme='red' hidden>
-          Abaixo da Meta
+  <Badge fontSize='0.8em' colorScheme='red' >
+  {atingimentoGYN.toFixed(2)} %
         </Badge>
         </Box>
 </Flex>

@@ -13,7 +13,8 @@ interface Props {
 export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiariaCalcUDI, tendenciaUDI}: Props) {
 
   const textColor = useColorModeValue('secondaryGray.900', 'white');
-  const textcolorRed = useColorModeValue('red.500', 'red.400'); 
+  const textcolorRed = useColorModeValue('green.500', 'green.400'); 
+  const atingimentoUDI = (tendenciaUDI/metaUdi)*100;
   
   return (
     <div>
@@ -104,8 +105,8 @@ export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiari
           </Box>
   <Spacer />
  <Box p='2'>
-  <Badge fontSize='0.8em' colorScheme='red' hidden>
-          Abaixo da Meta
+  <Badge fontSize='0.8em' colorScheme='whatsapp' >
+          {atingimentoUDI.toFixed(2)} %
         </Badge>
         </Box>
 </Flex>
