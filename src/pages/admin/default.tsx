@@ -9,6 +9,7 @@ import 'styles/Fade.module.css';
 import Bloco3 from 'views/admin/profile/components/bloco3';
 import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw';
 import { fetchAndFormatDataHj, getTokenHj } from 'api/requests/Und_FaturDiario';
+import { fetchAndFormatDataGeral, getTokenGeral } from 'api/requests/Fatur_diarioGeral'; 
 import AdminNavbarLinks from 'components/navbar/NavbarLinksAdmin'
 
 
@@ -18,19 +19,21 @@ export default function UserReports() {
   const [gynSFormat, setGynSFormat] = useState<number | null>(null);
   const [udiSFormatHj, setUdiSFormatHj] = useState<number | null>(null);
   const [gynSFormatHj, setGynSFormatHj] = useState<number | null>(null);
+  const [udiSFormatGeral, setUdiSFormatGeral] = useState<number | null>(null);
+  const [gynSFormatGeral, setGynSFormatGeral] = useState<number | null>(null);
   const metaUdi = 3727807.22; 
   const metaGyn = 3879962.61;
   const diasUteisNoMes = 20;
   const diasConcluidos = 10;//
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
-  const tendenciaUDI = ((udiSFormat) / diasConcluidos) * diasUteisNoMes;
-  const tendenciaGYN = ((gynSFormat) / diasConcluidos) * diasUteisNoMes;
   const metaDiariaCalcUDI =
     udiSFormat !== 0 ? (metaUdi - udiSFormat) / diasFaltantes : 0;
   const metaDiariaCalcGYN =
     gynSFormat !== 0 ? (metaGyn - gynSFormat) / diasFaltantes : 0;
   const percentualdiaUdi = (udiSFormat / metaUdi) * 100;
   const percentualdiaGyn = (gynSFormat / metaGyn) * 100;
+  const tendenciaUDI = ((udiSFormatGeral) / (diasConcluidos + 1)) * diasUteisNoMes;
+  const tendenciaGYN = (((gynSFormatGeral) / (diasConcluidos + 1)) * diasUteisNoMes);
  
 
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
@@ -45,7 +48,6 @@ export default function UserReports() {
             const { udiSFormat, gynSFormat } = response;
             setUdiSFormat(udiSFormat);
             setGynSFormat(gynSFormat);
-            setIsLoadingData(false);
           } else {
             console.error('Erro ao formatar os dados.');
           }
@@ -58,6 +60,35 @@ export default function UserReports() {
     }
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchDataGeral() {
+      try {
+        const token = await getTokenGeral();
+        if (token !== null) {
+          const response = await fetchAndFormatDataGeral(token);
+          if (response !== null) {
+            const { udiSFormatGeral, gynSFormatGeral, } = response;
+
+            setUdiSFormatGeral(udiSFormatGeral);  
+            setGynSFormatGeral(gynSFormatGeral);
+            
+          } else {
+            console.error('Erro ao formatar os dados.');
+          }
+        } else {
+          console.error('Não foi possível obter o token.');
+        }
+      } catch (error) {
+        console.error('Erro na requisição:', error);
+      }
+
+    }
+
+    fetchDataGeral();
+
+    
   }, []);
 
   useEffect(() => {
@@ -123,20 +154,24 @@ export default function UserReports() {
             percentualdiaGyn={percentualdiaGyn}
             metaUdi = {metaUdi}
             metaGyn = {metaGyn}
-            diasFaltantes = {diasFaltantes}/>
+            diasFaltantes = {diasFaltantes}
+            isLoadingData = {isLoadingData}/>
+            
             <Bloco1
-              diasFaltantes={diasFaltantes}
+              
               isLoadingData={isLoadingData}
               metaUdi={metaUdi}
               metaDiariaCalcUDI={metaDiariaCalcUDI}
               tendenciaUDI={tendenciaUDI}
+              
             />
             <Bloco2
-              diasFaltantes={diasFaltantes}
+              
               isLoadingData={isLoadingData}
               metaGyn={metaGyn}
               metaDiariaCalcGYN={metaDiariaCalcGYN}
               tendenciaGYN={tendenciaGYN}
+              
             />
           </Grid>
           <Box mt='15'>

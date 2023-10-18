@@ -3,7 +3,7 @@ import { GOL } from '../interfaces/GOL';
 import { apiLink, contentType, payloadReq } from '../payloads/GOL';
 
 
-export async function fetchAndFormatData(token: string): Promise<{ formattedValue1: string, formattedValue2: string, percentValue1: number, percentValue2: number, udiSFormat: number, gynSFormat: number } | null> {
+export async function fetchAndFormatData(token: string): Promise<{  udiSFormat: number, gynSFormat: number } | null> {
   try {
     const apiUrl = apiLink;
     const xmlPayload = payloadReq;
@@ -36,10 +36,6 @@ export async function fetchAndFormatData(token: string): Promise<{ formattedValu
       const total = udiValue + gynValue;
 
       const formattedValues = {
-        formattedValue1: udiValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-        formattedValue2: gynValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-        percentValue1: (udiValue / total) * 100,
-        percentValue2: (gynValue / total) * 100,
         udiSFormat: udiValue,
         gynSFormat: gynValue,
       };

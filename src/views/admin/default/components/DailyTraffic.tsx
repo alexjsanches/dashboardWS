@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Flex, Icon, Text, useColorModeValue, Badge,Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import { Box, Flex, Icon, Text, useColorModeValue, Badge,Skeleton, SkeletonCircle, Spacer } from '@chakra-ui/react';
 import Card from 'components/card/Card';
 import { VSeparator } from 'components/separator/Separator';
 import { RiArrowUpSFill } from 'react-icons/ri';
-import { fetchAndFormatData, getToken } from 'api/requests/Fatur_diarioGeral'; 
+import { fetchAndFormatDataGeral, getTokenGeral } from 'api/requests/Fatur_diarioGeral'; 
 import StatusIndicator from './StatusIndicator';
 import { Grafico } from './Grafico';
 
@@ -13,14 +13,15 @@ interface Props {
   metaUdi: number;
   metaGyn: number;
   diasFaltantes: number;
+  isLoadingData: boolean;
 }
 
 
-export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentualdiaGyn, metaUdi, metaGyn, ... rest }:Props) {
+export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdiaUdi, percentualdiaGyn, metaUdi, metaGyn, ... rest }:Props) {
   
-  const [isLoadingData, setIsLoadingData] = useState(true);
-  const [formattedValue1, setFormattedValue1] = useState<string | null>('Carregando...');
-  const [formattedValue2, setFormattedValue2] = useState<string | null>('Carregando...');
+  
+  const [formattedValue1, setFormattedValue1] = useState<number | null>(null);
+  const [formattedValue2, setFormattedValue2] = useState<number | null> (null);
   const textColor = useColorModeValue('secondaryGray.900', 'white');
 
 
@@ -28,15 +29,14 @@ export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentu
   useEffect(() => {
     async function fetchData() {
       try {
-        const token = await getToken();
+        const token = await getTokenGeral();
         if (token !== null) {
-          const response = await fetchAndFormatData(token);
+          const response = await fetchAndFormatDataGeral(token);
           if (response !== null) {
-            const { formattedValue1, formattedValue2, } = response;
+            const { gynSFormatGeral, udiSFormatGeral, } = response;
 
-            setFormattedValue1(formattedValue1);  
-            setFormattedValue2(formattedValue2);
-            setIsLoadingData(false);
+            setFormattedValue1(udiSFormatGeral);  
+            setFormattedValue2(gynSFormatGeral);
           } else {
             console.error('Erro ao formatar os dados.');
           }
@@ -60,10 +60,13 @@ export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentu
       <Text fontSize='lg' fontWeight='bold'>
         Por Unidade
       </Text>
-      <Badge ml='10' fontSize='0.8em' colorScheme='purple'>
+      <Flex justify='start' align='center'>
+      <Badge mr='2' fontSize='0.8em' colorScheme='purple'>
           Faltam {diasFaltantes} dias
         </Badge>
+
         <StatusIndicator />
+        </Flex>
       </Flex>
       <Flex justify='space-between' align='start' pt='5px' w='100%'>
         <Flex flexDirection='column' align='start'>
@@ -75,7 +78,7 @@ export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentu
               <Skeleton height="20px" width="250px" />
             ) : (
             <Text color={textColor} fontSize='30px' fontWeight='700' lineHeight='100%'>
-              {formattedValue1 !== null ? formattedValue1 : 'Carregando...'}
+              {formattedValue1 !== null ? formattedValue1.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Carregando...'}
             </Text>
             )}
           </Flex>
@@ -101,7 +104,7 @@ export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentu
               <Skeleton height="20px" width="250px" />
             ) : (
             <Text color={textColor} fontSize='30px' fontWeight='700' lineHeight='100%'>
-              {formattedValue2 !== null ? formattedValue2 : 'Carregando...'}
+              {formattedValue2 !== null ? formattedValue2.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Carregando...'}
             </Text>
             )}
           </Flex>
@@ -117,10 +120,9 @@ export default function DailyTraffic({ diasFaltantes, percentualdiaUdi, percentu
             )}
         </Flex>
       </Flex>
-      <Box h='240px' mt='25px'>
-        <Grafico metaUdi = {metaUdi}
-            metaGyn = {metaGyn} />
-      </Box>
+      <Flex justify='center' align='center' w='100%' mt='20px'>
+        <Grafico metaUdi = {metaUdi} metaGyn = {metaGyn} />
+        </Flex>
     </Card>
   );
 }

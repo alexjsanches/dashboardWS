@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import Card from 'components/card/Card';
 import { useState, useEffect } from 'react';
 import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Spacer } from '@chakra-ui/react';
 
 interface Props {
   metaUdi: number;
@@ -93,9 +93,20 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
         show: true,
         showForSingleSeries: true,
         customLegendItems: ['Atual', 'Meta'],
+        labels: {
+          colors: '#fff',
+        },
         markers: {
           fillColors: ['#00E396', '#775DD0'],
         },
+      },
+      xaxis: {
+        
+        labels: {
+          style:{
+            colors: '#fff'
+          }
+        }
       },
       yaxis: {
         show: false,
@@ -158,22 +169,42 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
         show: true,
         showForSingleSeries: true,
         customLegendItems: ['Atual', 'Meta'],
+        labels: {
+          colors: '#fff',
+        },
         markers: {
           fillColors: ['#00E396', '#775DD0'],
         },
       },
+      xaxis: {
+        
+        labels: {
+          style:{
+            colors: '#fff'
+          }
+        }
+      },
+      
       yaxis: {
         show: false,
+        labels: {
+          style:{
+            colors: '#fff'
+          }
+        }
       },
     },
   };
 
   return (
-    <Box>
-      <Flex>
+    <Flex>
+      <Box p='4' >
       <Chart options={dataUdi.options} series={dataUdi.series} type="bar"  width='160px' height='220px'/>
+      </Box>
+      <Spacer />
+      <Box p='4' >
       <Chart options={dataGyn.options} series={dataGyn.series} type="bar"  width='160px' height='220px'/>
-      </Flex>
-    </Box>
+      </Box>
+    </Flex>
   );
 }

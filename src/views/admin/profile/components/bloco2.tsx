@@ -1,14 +1,14 @@
 import { Box, Spacer, Badge, Flex, Text, Skeleton, useColorModeValue } from '@chakra-ui/react';
 import Card from 'components/card/Card';
 interface Props {
-  diasFaltantes: number;
   isLoadingData: boolean;
   metaGyn: number;
   metaDiariaCalcGYN: number;
   tendenciaGYN: number;
+ 
 }
 
-export default function Bloco2({ diasFaltantes, isLoadingData, metaGyn, metaDiariaCalcGYN, tendenciaGYN}: Props) {
+export default function Bloco2({ isLoadingData, metaGyn, metaDiariaCalcGYN, tendenciaGYN}: Props) {
 
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const textcolorRed = useColorModeValue('red.500', 'red.400'); 

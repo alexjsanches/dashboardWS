@@ -55,8 +55,19 @@ const data = {
         show: true,
         showForSingleSeries: true,
         customLegendItems: ['Atual', 'Meta'],
+        labels: {
+          colors: '#fff',
+        },
         markers: {
-          fillColors: ['#00E396', '#775DD0']
+          fillColors: ['#00E396', '#775DD0'],
+        },
+      },
+      xaxis: {
+        
+        labels: {
+          style:{
+            colors: '#fff'
+          }
         }
       },
       yaxis:{

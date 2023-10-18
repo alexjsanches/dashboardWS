@@ -2,7 +2,7 @@ import { Box, Spacer, Badge, Flex, Text, Skeleton, useColorModeValue } from '@ch
 import Card from 'components/card/Card';
 
 interface Props {
-  diasFaltantes: number;
+
   isLoadingData: boolean;
   metaUdi: number;
   metaDiariaCalcUDI: number;
@@ -10,7 +10,7 @@ interface Props {
 
 }
 
-export default function Bloco1({diasFaltantes, isLoadingData, metaUdi, metaDiariaCalcUDI, tendenciaUDI}: Props) {
+export default function Bloco1({ isLoadingData, metaUdi, metaDiariaCalcUDI, tendenciaUDI}: Props) {
 
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const textcolorRed = useColorModeValue('green.500', 'green.400'); 
