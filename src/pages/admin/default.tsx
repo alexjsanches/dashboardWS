@@ -24,7 +24,7 @@ export default function UserReports() {
   const metaUdi = 3727807.22; 
   const metaGyn = 3879962.61;
   const diasUteisNoMes = 20;
-  const diasConcluidos = 10;//
+  const diasConcluidos = 11;//
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const metaDiariaCalcUDI =
     udiSFormat !== 0 ? (metaUdi - udiSFormat) / diasFaltantes : 0;
@@ -32,8 +32,8 @@ export default function UserReports() {
     gynSFormat !== 0 ? (metaGyn - gynSFormat) / diasFaltantes : 0;
   const percentualdiaUdi = (udiSFormat / metaUdi) * 100;
   const percentualdiaGyn = (gynSFormat / metaGyn) * 100;
-  const tendenciaUDI = ((udiSFormatGeral) / (diasConcluidos + 1)) * diasUteisNoMes;
-  const tendenciaGYN = (((gynSFormatGeral) / (diasConcluidos + 1)) * diasUteisNoMes);
+  const tendenciaUDI = ((udiSFormat) / (diasConcluidos)) * diasUteisNoMes;
+  const tendenciaGYN = (((gynSFormat) / (diasConcluidos)) * diasUteisNoMes);
  
 
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);

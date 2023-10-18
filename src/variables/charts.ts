@@ -347,34 +347,7 @@ export const pieChartOptions: ApexGeneric = {
     theme: "dark",
   },
 };
-export const iniChartData =[50, 50];
 
-// Inicialize as variáveis para armazenar os valores percentuais
-let udi: number | null = 50;
-let gyn: number | null = 50;
-
-// Função para buscar e atualizar os valores percentuais
-export async function fetchPercentuais() {
-  try {
-    const token = await getToken(); // Obtenha o token primeiro
-    if (token !== null) {
-      const response = await fetchAndFormatData(token);
-      if (response !== null) {
-        const { percentValue1, percentValue2 } = response;
-        return { udi: percentValue1, gyn: percentValue2 };
-      } else {
-        console.error('Erro ao formatar os dados.');
-        return { udi: null, gyn: null }; // Tratar o erro apropriadamente
-      }
-    } else {
-      console.error('Não foi possível obter o token.');
-      return { udi: null, gyn: null }; // Tratar o erro apropriadamente
-    }
-  } catch (error) {
-    console.error('Erro na requisição:', error);
-    return { udi: null, gyn: null }; // Tratar o erro apropriadamente
-  }
-}
 
 
 // Total Spent Default
