@@ -223,7 +223,7 @@ export default function UserReports() {
     return () => {
       clearInterval(screenInterval);
     };
-  }, [currentScreenIndex]);
+  }, [currentScreenIndex, screens]);
 
   return (
     <AdminLayout>
