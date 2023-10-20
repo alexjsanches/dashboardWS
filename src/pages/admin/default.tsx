@@ -133,11 +133,16 @@ export default function UserReports() {
     setCurrentScreenIndex(nextScreenIndex);
   };
   
+  const handleVideoEnded3 = () => {
+    const nextScreenIndex =
+      currentScreenIndex === screens.length - 1 ? 0 : currentScreenIndex + 1;
+    setCurrentScreenIndex(nextScreenIndex);
+  };
 
   const screens = [
     {
       type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
-      duration: 3 * 60 * 1000, // Duração em milissegundos (3 minutos)
+      duration: 2 * 60 * 1000, // Duração em milissegundos (3 minutos)
       content: (
         <div>
           <Grid
@@ -193,28 +198,39 @@ export default function UserReports() {
       ),
     },
     {
-      type: 'video', // Altere o tipo para 'video'
-      duration: 42* 1000, // Duração em milissegundos (dinâmica)
+      type: 'video', 
+      duration: 43* 1000, 
       content: (
-        <video width='1280' height='720' autoPlay onEnded={handleVideoEnded}>
+        <video muted width='1280' height='720' autoPlay onEnded={handleVideoEnded}>
           <source src='/img/video_h.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
       ),
     },
     {
-      type: 'video', // Altere o tipo para 'video'
-      duration: 31* 1000, // Duração em milissegundos (dinâmica)
+      type: 'video', 
+      duration: 33* 1000, 
       content: (
         <div>
-        <video width='1280' height='720' autoPlay onEnded={handleVideoEnded2} >
+        <video muted width='1280' height='720' autoPlay onEnded={handleVideoEnded2} >
           <source src='/img/video_k.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
         </div>
       ),
     },
-    // Adicione mais telas aqui da mesma forma
+    {
+      type: 'video', 
+      duration: 34* 1000, 
+      content: (
+        <div>
+        <video muted width='1280' height='720' autoPlay onEnded={handleVideoEnded3} >
+          <source src='/img/video_s.mp4' type='video/mp4' />
+          Seu navegador não suporta a reprodução de vídeo.
+        </video>
+        </div>
+      ),
+    },
   ];
   useEffect(() => {
     const nextScreenIndex =
