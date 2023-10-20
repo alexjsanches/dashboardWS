@@ -137,7 +137,7 @@ export default function UserReports() {
   const screens = [
     {
       type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
-      duration: 0.5 * 60 * 1000, // Duração em milissegundos (3 minutos)
+      duration: 3 * 60 * 1000, // Duração em milissegundos (3 minutos)
       content: (
         <div>
           <Grid
