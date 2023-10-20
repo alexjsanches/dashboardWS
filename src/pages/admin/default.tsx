@@ -127,12 +127,17 @@ export default function UserReports() {
     setCurrentScreenIndex(nextScreenIndex);
   };
 
+  const handleVideoEnded2 = () => {
+    const nextScreenIndex =
+      currentScreenIndex === screens.length - 1 ? 0 : currentScreenIndex + 1;
+    setCurrentScreenIndex(nextScreenIndex);
+  };
   
 
   const screens = [
     {
       type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
-      duration: 3 * 60 * 1000, // Duração em milissegundos (3 minutos)
+      duration: 0.5 * 60 * 1000, // Duração em milissegundos (3 minutos)
       content: (
         <div>
           <Grid
@@ -189,26 +194,24 @@ export default function UserReports() {
     },
     {
       type: 'video', // Altere o tipo para 'video'
-      duration: 39* 1000, // Duração em milissegundos (dinâmica)
+      duration: 42* 1000, // Duração em milissegundos (dinâmica)
       content: (
-        <video width='1280' height='720' autoPlay controls onEnded={handleVideoEnded}>
+        <video width='1280' height='720' autoPlay onEnded={handleVideoEnded}>
           <source src='/img/video_h.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
       ),
     },
     {
-      type: 'gif',
-      duration: 0.5 * 60 * 1000, // Duração em milissegundos (1 minuto)
+      type: 'video', // Altere o tipo para 'video'
+      duration: 31* 1000, // Duração em milissegundos (dinâmica)
       content: (
-        <img
-          src='/img/campanha.gif'
-          alt='GIF'
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
-        />
+        <div>
+        <video width='1280' height='720' autoPlay onEnded={handleVideoEnded2} >
+          <source src='/img/video_k.mp4' type='video/mp4' />
+          Seu navegador não suporta a reprodução de vídeo.
+        </video>
+        </div>
       ),
     },
     // Adicione mais telas aqui da mesma forma
