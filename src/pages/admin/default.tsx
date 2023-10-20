@@ -223,12 +223,12 @@ export default function UserReports() {
       type: 'video', 
       duration: 34* 1000, 
       content: (
-        <div>
+        
         <video muted width='1280' height='720' autoPlay onEnded={handleVideoEnded3} >
           <source src='/img/video_s.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
-        </div>
+        
       ),
     },
   ];
