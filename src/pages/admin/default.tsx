@@ -12,6 +12,22 @@ import { fetchAndFormatDataHj, getTokenHj } from 'api/requests/Und_FaturDiario';
 import { fetchAndFormatDataGeral, getTokenGeral } from 'api/requests/Fatur_diarioGeral'; 
 import AdminNavbarLinks from 'components/navbar/NavbarLinksAdmin'
 
+function getVideoDuration(videoSource: string) {
+  return new Promise((resolve, reject) => {
+    const videoElement = document.createElement('video');
+    videoElement.src = videoSource;
+
+    videoElement.onloadedmetadata = () => {
+      resolve(Math.floor(videoElement.duration * 1000)); // Duração em milissegundos
+    };
+
+    videoElement.onerror = (error) => {
+      reject(error);
+    };
+  });
+}
+
+
 
 export default function UserReports() {
   const [isLoadingData, setIsLoadingData] = useState(true);
@@ -35,9 +51,6 @@ export default function UserReports() {
   const tendenciaUDI = ((udiSFormat) / (diasConcluidos)) * diasUteisNoMes;
   const tendenciaGYN = (((gynSFormat) / (diasConcluidos)) * diasUteisNoMes);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-
- 
-
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
 
   useEffect(() => {
@@ -122,6 +135,7 @@ export default function UserReports() {
       clearInterval(intervalId);
     };
   }, []);
+  
 
   const handleVideoEnded = () => {
     const nextScreenIndex =
@@ -129,17 +143,10 @@ export default function UserReports() {
     setCurrentScreenIndex(nextScreenIndex);
   };
 
-  const handleVideoEnded2 = () => {
-    const nextScreenIndex =
-      currentScreenIndex === screens.length - 1 ? 0 : currentScreenIndex + 1;
-    setCurrentScreenIndex(nextScreenIndex);
-  };
-  
-
   const screens = [
     {
-      type: 'content', // 'content' para conteúdo atual, 'gif' para GIF
-      duration: 2 * 60 * 1000, // Duração em milissegundos (3 minutos)
+      type: 'content', 
+      duration: 2 * 60 * 1000,
       content: (
         <div>
           <Grid
@@ -196,9 +203,9 @@ export default function UserReports() {
     },
     {
       type: 'video', 
-      duration: 43* 1000, 
+      duration: 38* 1000, 
       content: (
-        <video muted width='1280' height='720' autoPlay onPlay={() => setIsVideoPlaying(true)} onEnded={handleVideoEnded}>
+        <video muted width='1280' height='720' autoPlay onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
           <source src='/img/video_h.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
@@ -206,16 +213,29 @@ export default function UserReports() {
     },
     {
       type: 'video', 
-      duration: 33* 1000, 
+      duration: 25* 1000, 
       content: (
         <div>
-        <video muted width='1280' height='720' autoPlay  onPlay={() => setIsVideoPlaying(true)} onEnded={handleVideoEnded2} >
+        <video muted width='1280' height='720' autoPlay  onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
           <source src='/img/video_k.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
         </div>
       ),
     },
+    {
+      type: 'video', 
+      duration: 38* 1000, 
+      content: (
+        <>
+        <video muted width='1280' height='720' autoPlay  onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
+          <source src='/img/video_s.mp4' type='video/mp4' />
+          Seu navegador não suporta a reprodução de vídeo.
+        </video>
+        </>
+      ),
+    },
+    
   ];
   useEffect(() => {
     const nextScreenIndex =
