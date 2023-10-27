@@ -225,7 +225,7 @@ export default function UserReports() {
     },
     {
       type: 'video', 
-      duration: 38* 1000, 
+      duration: 43* 1000, 
       content: (
         <>
         <video muted width='1280' height='720' autoPlay  onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
