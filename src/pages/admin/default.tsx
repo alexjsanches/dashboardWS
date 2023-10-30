@@ -203,7 +203,7 @@ export default function UserReports() {
     },
     {
       type: 'video', 
-      duration: 38* 1000, 
+      duration: 100* 1000, 
       content: (
         <video muted width='1280' height='720' autoPlay onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
           <source src='/img/video_h.mp4' type='video/mp4' />
@@ -213,7 +213,7 @@ export default function UserReports() {
     },
     {
       type: 'video', 
-      duration: 25* 1000, 
+      duration: 100* 1000, 
       content: (
         <div>
         <video muted width='1280' height='720' autoPlay  onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
@@ -221,6 +221,18 @@ export default function UserReports() {
           Seu navegador não suporta a reprodução de vídeo.
         </video>
         </div>
+      ),
+    },
+    {
+      type: 'video', 
+      duration: 100* 1000, 
+      content: (
+        <>
+        <video autoPlay width='1280' height='720' con  onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
+          <source src='/img/video_s.mp4' type='video/mp4' />
+          Seu navegador não suporta a reprodução de vídeo.
+        </video>
+        </>
       ),
     },
     
