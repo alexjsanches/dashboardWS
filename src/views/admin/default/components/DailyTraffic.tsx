@@ -78,7 +78,10 @@ export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdi
               <Skeleton height="20px" width="250px" />
             ) : (
             <Text color={textColor} fontSize='30px' fontWeight='700' lineHeight='100%'>
-              {formattedValue1 !== null ? formattedValue1.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Carregando...'}
+              {
+  formattedValue1 != null ? formattedValue1.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Carregando...'
+}
+
             </Text>
             )}
           </Flex>
@@ -89,7 +92,7 @@ export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdi
               <Skeleton height="20px" width="50px" />
             ) : (
           <Text color='green.500' fontSize='sm' fontWeight='700'>
-            {percentualdiaUdi !== null ? `${percentualdiaUdi.toFixed(2)} %` : 'Carregando...'}
+            {percentualdiaUdi != null ? `${percentualdiaUdi.toFixed(2)} %` : 'Carregando...'}
           </Text>
             )}
         </Flex>
@@ -104,7 +107,7 @@ export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdi
               <Skeleton height="20px" width="250px" />
             ) : (
             <Text color={textColor} fontSize='30px' fontWeight='700' lineHeight='100%'>
-              {formattedValue2 !== null ? formattedValue2.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Carregando...'}
+              {formattedValue2 != null ? formattedValue2.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Carregando...'}
             </Text>
             )}
           </Flex>
@@ -115,7 +118,7 @@ export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdi
               <Skeleton height="20px" width="50px" />
             ) : (
           <Text color='green.500' fontSize='sm' fontWeight='700'>
-            {percentualdiaGyn !== null ? `${percentualdiaGyn.toFixed(2)} %` : 'Carregando...'}
+            {percentualdiaGyn != null ? `${percentualdiaGyn.toFixed(2)} %` : 'Carregando...'}
           </Text>
             )}
         </Flex>
