@@ -37,19 +37,19 @@ export default function UserReports() {
   const [gynSFormatHj, setGynSFormatHj] = useState<number | null>(null);
   const [udiSFormatGeral, setUdiSFormatGeral] = useState<number | null>(null);
   const [gynSFormatGeral, setGynSFormatGeral] = useState<number | null>(null);
-  const metaUdi = 0; 
-  const metaGyn = 0;
-  const diasUteisNoMes = 20;
-  const diasConcluidos = 0;//
+  const metaUdi =  3723000;  
+  const metaGyn =  3577000;
+  const diasUteisNoMes = 21;
+  const diasConcluidos = 1;//
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const metaDiariaCalcUDI =
-    udiSFormat != 0 ? (metaUdi - udiSFormat) / diasFaltantes : 0;
+    udiSFormat != 0 ? (metaUdi - udiSFormatGeral) / diasFaltantes : 0;
   const metaDiariaCalcGYN =
-    gynSFormat != 0 ? (metaGyn - gynSFormat) / diasFaltantes : 0;
+    gynSFormat != 0 ? (metaGyn - gynSFormatGeral) / diasFaltantes : 0;
   const percentualdiaUdi = (udiSFormat / metaUdi) * 100;
   const percentualdiaGyn = (gynSFormat / metaGyn) * 100;
-  const tendenciaUDI = ((udiSFormat) / (diasConcluidos)) * diasUteisNoMes;
-  const tendenciaGYN = (((gynSFormat) / (diasConcluidos)) * diasUteisNoMes);
+  const tendenciaUDI = ((udiSFormatGeral) / (diasConcluidos)) * diasUteisNoMes;
+  const tendenciaGYN = (((gynSFormatGeral) / (diasConcluidos)) * diasUteisNoMes);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
 
@@ -223,7 +223,18 @@ export default function UserReports() {
         </div>
       ),
     },
-    
+    {
+      type: 'video', 
+      duration: 100* 1000, 
+      content: (
+        <>
+        <video muted width='1280' height='720' autoPlay  onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
+          <source src='/img/video_s.mp4' type='video/mp4' />
+          Seu navegador não suporta a reprodução de vídeo.
+        </video>
+        </>
+      ),
+    },
   ];
   useEffect(() => {
     const nextScreenIndex =
