@@ -62,7 +62,7 @@ export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdi
       </Text>
       <Flex justify='start' align='center'>
       <Badge mr='2' fontSize='0.8em' colorScheme='purple'>
-          Falta {diasFaltantes} dia
+          Faltam {diasFaltantes} dias
         </Badge>
 
         <StatusIndicator />
