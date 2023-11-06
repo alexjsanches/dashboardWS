@@ -125,7 +125,7 @@ export default function Bloco1({ isLoadingData, metaUdi, metaDiariaCalcUDI, tend
       {isLoadingData ? (
               <Skeleton height="20px" width="250px" />
             ) : (
-            <Text color={textcolorRed} fontSize='35px' fontWeight='700' lineHeight='100%'>
+            <Text color={textColor} fontSize='35px' fontWeight='700' lineHeight='100%'>
             {tendenciaUDI.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}   
             </Text>
             )}

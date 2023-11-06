@@ -56,7 +56,7 @@ const data = {
         showForSingleSeries: true,
         customLegendItems: ['Atual', 'Meta'],
         labels: {
-          colors: '#fff',
+          colors: '#000',
         },
         markers: {
           fillColors: ['#00E396', '#775DD0'],
@@ -66,7 +66,7 @@ const data = {
         
         labels: {
           style:{
-            colors: '#fff'
+            colors: '#000'
           }
         }
       },

@@ -78,7 +78,7 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
         },
       },
       tooltip: {
-        theme: "dark",
+        theme: "light",
       },
       plotOptions: {
         bar: {
@@ -94,7 +94,7 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
         showForSingleSeries: true,
         customLegendItems: ['Atual', 'Meta'],
         labels: {
-          colors: '#fff',
+          colors: '#000',
         },
         markers: {
           fillColors: ['#00E396', '#775DD0'],
@@ -104,7 +104,7 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
         
         labels: {
           style:{
-            colors: '#fff'
+            colors: '#000'
           }
         }
       },
@@ -154,7 +154,7 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
         
       },
       tooltip: {
-        theme: "dark",
+        theme: "light",
       },
       plotOptions: {
         bar: {
@@ -170,7 +170,7 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
         showForSingleSeries: true,
         customLegendItems: ['Atual', 'Meta'],
         labels: {
-          colors: '#fff',
+          colors: '#000',
         },
         markers: {
           fillColors: ['#00E396', '#775DD0'],
@@ -180,7 +180,7 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
         
         labels: {
           style:{
-            colors: '#fff'
+            colors: '#000'
           }
         }
       },

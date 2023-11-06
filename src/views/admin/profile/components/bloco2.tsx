@@ -103,7 +103,7 @@ export default function Bloco2({ isLoadingData, metaGyn, metaDiariaCalcGYN, tend
           </Box>
   <Spacer />
  <Box p='2'>
-  <Badge fontSize='0.8em' colorScheme='red' >
+  <Badge fontSize='0.8em' colorScheme='whatsapp' >
   {atingimentoGYN.toFixed(2)} %
         </Badge>
         </Box>
@@ -123,7 +123,7 @@ export default function Bloco2({ isLoadingData, metaGyn, metaDiariaCalcGYN, tend
       {isLoadingData ? (
               <Skeleton height="20px" width="250px" />
             ) : (
-            <Text color={textcolorRed} fontSize='35px' fontWeight='700' lineHeight='100%'>
+            <Text color={textColor} fontSize='35px' fontWeight='700' lineHeight='100%'>
             {tendenciaGYN.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}   
             </Text>
             )}
