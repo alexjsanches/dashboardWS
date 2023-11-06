@@ -54,7 +54,7 @@ export async function fetchAndFormatDataHj(token: string): Promise<{ udiSFormatH
 // Função para obter o token
 export async function getTokenHj(): Promise<string | null> {
   try {
-    const tokenResponse = await axios.get('https://serverws.onrender.com/api/token');
+    const tokenResponse = await axios.get('https://serverws2.onrender.com/api/token');
     return tokenResponse.data.token;
   } catch (error) {
     console.error('Erro ao obter o token:', error);
