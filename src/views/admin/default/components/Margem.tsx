@@ -1,6 +1,5 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
 }
 
 export function Margem({ percMargem }: Props) {
-  const DynamicChart = dynamic(() => import('react-apexcharts'), { ssr: false });
+  const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
   if (!percMargem || typeof percMargem !== 'object') {
     // Pode retornar uma mensagem ou um componente alternativo indicando que não há dados

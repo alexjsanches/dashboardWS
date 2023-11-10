@@ -23,6 +23,7 @@ export default function UserReports() {
           const response = await fetchAndFormatData(token);
           if (response !== null) {
             setPercMargem(response);
+            setIsLoadingData(false);
           } else {
             console.error('Erro ao formatar os dados.');
           }

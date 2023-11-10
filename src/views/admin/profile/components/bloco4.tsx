@@ -38,7 +38,9 @@ export default function Bloco4({percMargem, isLoadingData} : Props) {
                 <Flex direction='row' mb='5px' align='center' justify='center' pt='5px'>
 
 
-                <Margem percMargem={percMargem} />
+                {isLoadingData ? (
+              <Skeleton height="20px" width="250px" />
+            ) : (<Margem percMargem={percMargem} />)}
   
 
 
