@@ -110,6 +110,11 @@ export function Grafico({ metaUdi, metaGyn }: Props) {
       },
       yaxis: {
         show: false,
+        labels: {
+          style:{
+            colors: '#fff'
+          }
+        }
       },
     },
   };
