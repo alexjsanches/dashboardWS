@@ -40,7 +40,7 @@ export default function UserReports() {
   const metaUdi =  3577000;  
   const metaGyn =  3723000;
   const diasUteisNoMes = 20;
-  const diasConcluidos = 8;//
+  const diasConcluidos = 9;//
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const metaDiariaCalcUDI =
     udiSFormat != 0 ? (metaUdi - udiSFormatGeral) / diasFaltantes : 0;
@@ -229,7 +229,7 @@ export default function UserReports() {
       content: (
         <>
         <video muted width='1280' height='720' autoPlay  onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
-          <source src='/img/video_s.mp4' type='video/mp4' />
+          <source src='/img/video_h.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
         </>
