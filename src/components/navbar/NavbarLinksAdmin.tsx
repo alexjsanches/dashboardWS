@@ -8,7 +8,7 @@ import React, { useEffect } from 'react';
 
 export default function HeaderLinks() {
 	const { colorMode, toggleColorMode } = useColorMode();
-	const initialColorMode = 'light';
+	const initialColorMode = 'dark';
 
 	useEffect(() => {
 		if (colorMode !== initialColorMode) {

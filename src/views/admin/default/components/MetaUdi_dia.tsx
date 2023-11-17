@@ -39,6 +39,9 @@ const data = {
             show: false,
         }
       },
+      tooltip: {
+        theme: "dark",
+      },
       plotOptions: {
         bar: {
           columnWidth: '60%'
@@ -53,7 +56,7 @@ const data = {
         showForSingleSeries: true,
         customLegendItems: ['Atual', 'Meta'],
         labels: {
-          colors: '#000',
+          colors: '#fff',
         },
         markers: {
           fillColors: ['#00E396', '#775DD0'],
@@ -63,7 +66,7 @@ const data = {
         
         labels: {
           style:{
-            colors: '#000'
+            colors: '#fff'
           }
         }
       },
