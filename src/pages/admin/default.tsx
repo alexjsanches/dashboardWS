@@ -18,7 +18,7 @@ function getVideoDuration(videoSource: string) {
     videoElement.src = videoSource;
 
     videoElement.onloadedmetadata = () => {
-      resolve(Math.floor(videoElement.duration * 1000)); 
+      resolve(Math.floor(videoElement.duration * 1000)); //
     };
 
     videoElement.onerror = (error) => {
