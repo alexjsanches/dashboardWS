@@ -11,6 +11,7 @@ import { fetchAndFormatData, getToken } from 'api/requests/sankhyaw';
 import { fetchAndFormatDataHj, getTokenHj } from 'api/requests/Und_FaturDiario';
 import { fetchAndFormatDataGeral, getTokenGeral } from 'api/requests/Fatur_diarioGeral'; 
 import AdminNavbarLinks from 'components/navbar/NavbarLinksAdmin'
+// import { calculateWorkingDaysIncludingToday } from './dates';
 
 function getVideoDuration(videoSource: string) {
   return new Promise((resolve, reject) => {
@@ -30,6 +31,25 @@ function getVideoDuration(videoSource: string) {
 
 
 export default function UserReports() {
+
+  // async function getWorkingDays() {
+  //   const today = new Date();
+  //   const year = today.getFullYear();
+  //   const month = today.getMonth();
+  
+  //   try {
+  //     const { diasUteisNoMes, diasFaltantes } = await calculateWorkingDaysIncludingToday(year, month);
+  
+  //     console.log(`Dias úteis no mês: ${diasUteisNoMes}`);
+  //     console.log(`Dias faltantes considerando feriados: ${diasFaltantes}`);
+  //   } catch (error) {
+  //     console.error('Erro ao calcular dias úteis:', error);
+  //   }
+  // }
+  
+  // getWorkingDays();
+
+
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [udiSFormat, setUdiSFormat] = useState<number | null>(null);
   const [gynSFormat, setGynSFormat] = useState<number | null>(null);
@@ -229,7 +249,7 @@ export default function UserReports() {
       content: (
         <>
         <video muted width='1280' height='720' autoPlay  onPlay={() => setIsVideoPlaying(true)} style={{borderRadius: '20px'}} onEnded={handleVideoEnded} >
-          <source src='/img/video_h.mp4' type='video/mp4' />
+          <source src='/img/video_s.mp4' type='video/mp4' />
           Seu navegador não suporta a reprodução de vídeo.
         </video>
         </>
