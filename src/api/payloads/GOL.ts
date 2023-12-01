@@ -18,7 +18,7 @@ const getYesterday = () => {
 export let payloadReq = `
   <serviceRequest serviceName="VendasGOLSP.getVendasFaturamento">
     <requestBody>
-      <vendas PERIODO.INI="${getFirstDayOfPreviousMonth()}" PERIODO.FIN="${getYesterday()}" TIPO="VENDEDOR" _id="-50" CONFIG_CONSOLIDACAO="5" EMPRESA="999,4,2,3,1,100" GERENTESUBORDINADO="false" TIPO_AGRUPAMENTO="G"/>
+      <vendas PERIODO.INI="${getFirstDayOfPreviousMonth()}" PERIODO.FIN="${getFirstDayOfPreviousMonth()}" TIPO="VENDEDOR" _id="-50" CONFIG_CONSOLIDACAO="5" EMPRESA="999,4,2,3,1,100" GERENTESUBORDINADO="false" TIPO_AGRUPAMENTO="G"/>
       <clientEventList/>
     </requestBody>
   </serviceRequest>
