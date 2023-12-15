@@ -60,7 +60,7 @@ export default function UserReports() {
   const metaUdi =  3430000;  
   const metaGyn =  3570000;
   const diasUteisNoMes = 20;
-  const diasConcluidos = 9;
+  const diasConcluidos = 10;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const metaDiariaCalcUDI =
     udiSFormat != 0 ? (metaUdi - udiSFormatGeral) / diasFaltantes : 0;
