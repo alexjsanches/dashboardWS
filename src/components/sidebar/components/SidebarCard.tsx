@@ -53,7 +53,7 @@ export default function SidebarDocs() {
         position='relative'
       >
          <iframe
-        src="https://www.instagram.com/p/CzY7xpVrTbe/embed"
+        src="https://www.instagram.com/p/C01qEqaLWgK/embed"
         width="100%"
         height="400px"
         scrolling="no"
