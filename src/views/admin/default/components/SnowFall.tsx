@@ -4,7 +4,7 @@ const Snowfall: React.FC = () => {
   useEffect(() => {
     const script: HTMLScriptElement = document.createElement('script');
    
-    script.src = '//d26lpennugtm8s.cloudfront.net/assets/blog_pt/snowstorm-min.js';
+    script.src = '';
     script.async = true;
     document.body.appendChild(script);
 
