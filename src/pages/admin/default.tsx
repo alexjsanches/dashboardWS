@@ -68,8 +68,8 @@ export default function UserReports() {
    0; //gynSFormat != 0 ? (metaGyn - gynSFormatGeral) / diasFaltantes : 0;
   const percentualdiaUdi = (udiSFormat / metaUdi) * 100;
   const percentualdiaGyn = (gynSFormat / metaGyn) * 100;
-  const tendenciaUDI = ((udiSFormatGeral) / (diasConcluidos)) * diasUteisNoMes;
-  const tendenciaGYN = (((gynSFormatGeral) / (diasConcluidos)) * diasUteisNoMes);
+  const tendenciaUDI = 0; // ((udiSFormatGeral) / (diasConcluidos)) * diasUteisNoMes;
+  const tendenciaGYN = 0; // (((gynSFormatGeral) / (diasConcluidos)) * diasUteisNoMes);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
 
