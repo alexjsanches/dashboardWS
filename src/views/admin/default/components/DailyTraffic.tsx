@@ -14,10 +14,12 @@ interface Props {
   metaGyn: number;
   diasFaltantes: number;
   isLoadingData: boolean;
+  udiSFormatGeral: number;
+  gynSFormatGeral: number;
 }
 
 
-export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdiaUdi, percentualdiaGyn, metaUdi, metaGyn, ... rest }:Props) {
+export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdiaUdi, percentualdiaGyn, metaUdi, metaGyn, udiSFormatGeral, gynSFormatGeral, ... rest }:Props) {
   
   
   const [formattedValue1, setFormattedValue1] = useState<number | null>(null);
@@ -124,7 +126,7 @@ export default function DailyTraffic({isLoadingData, diasFaltantes, percentualdi
         </Flex>
       </Flex>
       <Flex justify='center' align='center' w='100%' mt='20px'>
-        <Grafico metaUdi = {metaUdi} metaGyn = {metaGyn} />
+        <Grafico udiSFormatGeral = {udiSFormatGeral} gynSFormatGeral = {gynSFormatGeral} metaUdi = {metaUdi} metaGyn = {metaGyn} />
         </Flex>
     </Card>
   );
