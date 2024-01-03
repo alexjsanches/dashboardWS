@@ -189,7 +189,9 @@ export default function UserReports() {
             metaUdi = {metaUdi}
             metaGyn = {metaGyn}
             diasFaltantes = {diasFaltantes}
-            isLoadingData = {isLoadingData}/>
+            isLoadingData = {isLoadingData}
+            udiSFormatGeral={udiSFormatGeral}
+            gynSFormatGeral={gynSFormatGeral}/>
             
             <Bloco1
               
