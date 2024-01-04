@@ -57,19 +57,19 @@ export default function UserReports() {
   const [gynSFormatHj, setGynSFormatHj] = useState<number | null>(null);
   const [udiSFormatGeral, setUdiSFormatGeral] = useState<number | null>(null);
   const [gynSFormatGeral, setGynSFormatGeral] = useState<number | null>(null);
-  const metaUdi =  0;  
-  const metaGyn =  0;
+  const metaUdi =  3416740;  
+  const metaGyn =  3092368;
   const diasUteisNoMes = 22;
-  const diasConcluidos = 1;
+  const diasConcluidos = 2;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const metaDiariaCalcUDI =
-   0; // udiSFormat != 0 ? (metaUdi - udiSFormatGeral) / diasFaltantes : 0;
+    udiSFormat != 0 ? (metaUdi - udiSFormatGeral) / diasFaltantes : 0;
   const metaDiariaCalcGYN =
-   0; //gynSFormat != 0 ? (metaGyn - gynSFormatGeral) / diasFaltantes : 0;
+   gynSFormat != 0 ? (metaGyn - gynSFormatGeral) / diasFaltantes : 0;
   const percentualdiaUdi = (udiSFormat / metaUdi) * 100;
   const percentualdiaGyn = (gynSFormat / metaGyn) * 100;
-  const tendenciaUDI = 0; // ((udiSFormatGeral) / (diasConcluidos)) * diasUteisNoMes;
-  const tendenciaGYN = 0; // (((gynSFormatGeral) / (diasConcluidos)) * diasUteisNoMes);
+  const tendenciaUDI = ((udiSFormatGeral) / (diasConcluidos)) * diasUteisNoMes;
+  const tendenciaGYN =  (((gynSFormatGeral) / (diasConcluidos)) * diasUteisNoMes);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentScreenIndex, setCurrentScreenIndex] = useState(0);
 
