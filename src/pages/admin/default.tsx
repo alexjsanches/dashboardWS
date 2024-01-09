@@ -60,7 +60,7 @@ export default function UserReports() {
   const metaUdi =  3092368;  //FEV 2769167	MAR 3318865	ABR 2897627	MAI 3193528	JUN 2691368	JUL 3047658	AGO 3416416	SET 3010496	OUT 3464198	NOV 3673278	DEZ 2385031
   const metaGyn =  3416740;  //FEV 3420247	MAR 4391634	ABR 3381271	MAI 3523757	JUN 3776731	JUL 3753618	AGO 3962307	SET 4031272	OUT 3487534	NOV 3676253	DEZ 2858635
   const diasUteisNoMes = 22;
-  const diasConcluidos = 4;
+  const diasConcluidos = 5;
   const diasFaltantes = diasUteisNoMes - diasConcluidos;
   const metaDiariaCalcUDI =
     udiSFormat != 0 ? (metaUdi - udiSFormatGeral) / diasFaltantes : 0;
